@@ -1,42 +1,46 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Home page */
+#home {
+    background-image: url(https://img-s1.onedio.com/id-61e5777e7cb2fa2c51b44ccf/rev-0/raw/s-725090d1166e8d630e57aeea34ac335f2cf871a2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+#home2{
+    background-image: url(https://rs-menus-api.roocdn.com/images/2a0d4100-31c3-469e-bcfa-07df63d2ace2/image.jpeg?width=1200&height=630&fit=crop);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.mainhead{
+    font-size: 100px;
+    color: white;
+    font-weight: bold;
+    margin-top: 8px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.selectuserpagemaindiv{
+   background-image: url(https://wallpapercave.com/wp/wp5019587.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+
+.selectuserpagelinks{
+background-color: white;
+ 
+  transition-duration: .2s;
+}
+.selectuserpagelinks:hover{
+ background-color: rgb(227, 221, 221); 
 }
 
-.card {
-  padding: 2em;
-}
 
-.read-the-docs {
-  color: #888;
+#loginsignup{
+    background-image: url(https://static.wixstatic.com/media/b87ced_90d1d8820c6d427f9dd0a45143292daa~mv2.jpg/v1/fill/w_732,h_410,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/b87ced_90d1d8820c6d427f9dd0a45143292daa~mv2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+   
 }
