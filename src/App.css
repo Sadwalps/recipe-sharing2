@@ -5,47 +5,127 @@
     background-size: cover;
     height: 100vh;
 }
-#home2{
+
+#home2 {
     background-image: url(https://rs-menus-api.roocdn.com/images/2a0d4100-31c3-469e-bcfa-07df63d2ace2/image.jpeg?width=1200&height=630&fit=crop);
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
 }
 
-.mainhead{
+.mainhead {
     font-size: 100px;
     color: white;
     font-weight: bold;
     margin-top: 8px;
 }
 
-.selectuserpagemaindiv{
-   background-image: url(https://wallpapercave.com/wp/wp5019587.jpg);
+/* Header */
+#logoutdiv {
+    padding: 10px 14px;
+    background-color: rgb(43, 42, 42);
+    color: red;
+}
+
+#logoutdiv:hover {
+    color: rgb(43, 42, 42);
+    background-color: rgb(232, 27, 27);
+    transition-duration: .2s;
+    cursor: pointer;
+}
+
+/* Footer */
+.footerlogos{
+    background-color:white;
+    height: 55px;
+    width: 55px;
+    color: rgb(43, 41, 41);
+    font-size: x-large;
+   
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footerlogos:hover{
+    background-color: rgb(43, 41, 41);
+    color: white;
+    transition-duration: .2s;
+    box-shadow: 0px 0px 15px white;
+}
+
+/* Select user page */
+.selectuserpagemaindiv {
+    background-image: url(https://wallpapercave.com/wp/wp5019587.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
 }
 
-
-.selectuserpagelinks{
-background-color: white;
- 
-  transition-duration: .2s;
-}
-.selectuserpagelinks:hover{
- background-color: rgb(227, 221, 221); 
+.selectuserpagelinks {
+    background-color: white;
+    transition-duration: .2s;
 }
 
+.selectuserpagelinks:hover {
+    background-color: rgb(227, 221, 221);
+}
 
-#loginsignup{
+/* Authentication */
+#loginsignup {
     background-image: url(https://static.wixstatic.com/media/b87ced_90d1d8820c6d427f9dd0a45143292daa~mv2.jpg/v1/fill/w_732,h_410,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/b87ced_90d1d8820c6d427f9dd0a45143292daa~mv2.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
-   
 }
 
-.pnfheading{
+/* Recipe card */
+#deletebutton{
+    height: 35px;
+    width: 35px;
+    font-size: x-large;
+}
+#deletebutton:hover{
+    height: 42px;
+    width: 42px;
+    font-size:xx-large ;
+}
+.coveringdiv{
+    height: 45px;
+    width: 45px;
+    cursor: pointer;
+}
+
+/* Page not found */
+.pnfheading {
     font-size: 70px;
     font-weight: bold;
 }
+
+
+
+/* media query */
+@media screen and (max-width:480px) {
+    #home {
+        
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    
+    .mainhead{
+        font-size: 60px;
+    }
+    /* #homerecipelargescreen{
+        display: none;
+    }
+    #homerecipesmallscreen{
+        display: block;
+    } */
+    .footerlogos{
+        height: 45px;
+        width: 45px;
+        font-size: large;
+    }
+    
+}
+

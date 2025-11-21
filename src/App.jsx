@@ -5,6 +5,7 @@ import SelectUserPage from './pages/SelectUserPage'
 import Authentication from './pages/Authentication'
 import PageNotFound from './pages/PageNotFound'
 import AdminDashboard from './pages/AdminDashboard'
+import MyRecipes from './pages/MyRecipes'
 
 function App() {
   
@@ -16,6 +17,7 @@ function App() {
      <Route path='/signup'  element={<Authentication signup={true}/>}/>
      <Route path='/login' element={<Authentication/>}/>
      <Route path='/admin' element={<AdminDashboard/>}/>
+     <Route path='/myrecipes' element={<MyRecipes/>}/>
      <Route path='*' element={<PageNotFound/>}/>
    </Routes>
     </>
