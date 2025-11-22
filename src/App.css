@@ -35,19 +35,20 @@
 }
 
 /* Footer */
-.footerlogos{
-    background-color:white;
+.footerlogos {
+    background-color: white;
     height: 55px;
     width: 55px;
     color: rgb(43, 41, 41);
     font-size: x-large;
-   
+
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.footerlogos:hover{
+
+.footerlogos:hover {
     background-color: rgb(43, 41, 41);
     color: white;
     transition-duration: .2s;
@@ -80,20 +81,43 @@
 }
 
 /* Recipe card */
-#deletebutton{
+#deletebutton {
     height: 35px;
     width: 35px;
     font-size: x-large;
 }
-#deletebutton:hover{
+
+#deletebutton:hover {
     height: 42px;
     width: 42px;
-    font-size:xx-large ;
+    font-size: xx-large;
 }
-.coveringdiv{
+
+.coveringdiv {
     height: 45px;
     width: 45px;
     cursor: pointer;
+}
+
+/* All recipes */
+#Allrecipe {
+    background-image: url(https://www.bulletproof.com/wp-content/uploads/2021/08/grilled-steak-with-grilled-vegetables-beer-and-wine-on-a-dark-wooden-picture-id696864806.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 91vh;
+
+}
+
+/* Edit  */
+#editbutton{
+    height:35px;
+    width: 35px;
+    font-size: x-large;
+}
+#editbutton:hover{
+    height: 42px;
+    width: 42px;
+    font-size: xx-large;
 }
 
 /* Page not found */
@@ -107,25 +131,25 @@
 /* media query */
 @media screen and (max-width:480px) {
     #home {
-        
+
         background-repeat: no-repeat;
         background-size: cover;
     }
-    
-    .mainhead{
+
+    .mainhead {
         font-size: 60px;
     }
+
     /* #homerecipelargescreen{
         display: none;
     }
     #homerecipesmallscreen{
         display: block;
     } */
-    .footerlogos{
+    .footerlogos {
         height: 45px;
         width: 45px;
         font-size: large;
     }
-    
-}
 
+}

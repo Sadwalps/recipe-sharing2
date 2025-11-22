@@ -6,20 +6,22 @@ import Authentication from './pages/Authentication'
 import PageNotFound from './pages/PageNotFound'
 import AdminDashboard from './pages/AdminDashboard'
 import MyRecipes from './pages/MyRecipes'
+import AllRecipes from './pages/AllRecipes'
 
 function App() {
-  
+
   return (
     <>
-   <Routes>
-    <Route path='/' element={<Home/>}/>
-    <Route path='/selectUserPage' element={<SelectUserPage/>}/>
-     <Route path='/signup'  element={<Authentication signup={true}/>}/>
-     <Route path='/login' element={<Authentication/>}/>
-     <Route path='/admin' element={<AdminDashboard/>}/>
-     <Route path='/myrecipes' element={<MyRecipes/>}/>
-     <Route path='*' element={<PageNotFound/>}/>
-   </Routes>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/selectUserPage' element={<SelectUserPage />} />
+        <Route path='/signup' element={<Authentication signup={true} />} />
+        <Route path='/login' element={<Authentication />} />
+        <Route path='/admin' element={<AdminDashboard />} />
+        <Route path='/myrecipes' element={<MyRecipes />} />
+        <Route path='/allrecipes' element={<AllRecipes />} />
+        <Route path='*' element={<PageNotFound />} />
+      </Routes>
     </>
   )
 }

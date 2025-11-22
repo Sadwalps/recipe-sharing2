@@ -1,6 +1,7 @@
 import { faClock, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
+import Edit from './Edit'
 
 function RecipeCard() {
     return (
@@ -19,7 +20,7 @@ function RecipeCard() {
                             <h5 className='mb-2'>item?.category</h5>
 
                             <div className='d-flex justify-content-between'>
-                                {/* <Edit recipes={item} /> */}
+                                 <Edit />
                                 <div className='coveringdiv'> <div className='bg-danger  d-flex justify-content-center align-items-center rounded' id='deletebutton'><FontAwesomeIcon icon={faTrash} style={{ color: "black" }} /></div>  </div>
 
                             </div>
