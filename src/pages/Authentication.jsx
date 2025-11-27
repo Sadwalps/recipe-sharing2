@@ -25,6 +25,7 @@ function Authentication({ signup }) {
                                     <p className='mt-3 text-white'>Not a user? click here to <Link to={'/signup'}>signup</Link> </p>}
                             </div>
                         </div>
+                        
                         <div className="col-md-4"></div>
                     </div>
                 </div>

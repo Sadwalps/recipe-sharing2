@@ -44,6 +44,27 @@ function Home() {
                     </div>
                 </div>
             </div>
+            
+            <div className='container-fluid'>
+                <div className="row">
+                    <div className="col-md-6">
+                        <img src="https://img.freepik.com/free-photo/italian-pasta-farfallini-fellini-garlic-tomato-mortar-pepper-onion-wooden-background-top-vie-copy-space_141793-3437.jpg" className='w-100 py-1 rounded' alt="" />
+                    </div>
+                    <div className="col-md-6 py-2">
+                        <div className="row d-flex flex-column">
+<div className="col-12"><img src="https://wallpaperaccess.com/full/986759.jpg " alt="" className='w-100 rounded' /></div>
+                            <div className="col-12 mt-2"><img src=" https://img.freepik.com/premium-photo/creamy-cake_928869-23140.jpg" alt="" className='w-100 rounded' /> </div>
+                       
+                        </div>
+                            
+                    </div>
+                </div>
+
+            </div>
+
+            <div className='container-fluid'>
+
+            </div>
             <Footer />
         </>
     )
