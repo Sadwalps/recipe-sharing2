@@ -44,7 +44,7 @@ function Home() {
                     </div>
                 </div>
             </div>
-            
+
             <div className='container-fluid'>
                 <div className="row">
                     <div className="col-md-6">
@@ -52,19 +52,27 @@ function Home() {
                     </div>
                     <div className="col-md-6 py-2">
                         <div className="row d-flex flex-column">
-<div className="col-12"><img src="https://wallpaperaccess.com/full/986759.jpg " alt="" className='w-100 rounded' /></div>
+                            <div className="col-12"><img src="https://wallpaperaccess.com/full/986759.jpg " alt="" className='w-100 rounded' /></div>
                             <div className="col-12 mt-2"><img src=" https://img.freepik.com/premium-photo/creamy-cake_928869-23140.jpg" alt="" className='w-100 rounded' /> </div>
-                       
                         </div>
-                            
                     </div>
                 </div>
 
             </div>
 
-            <div className='container-fluid'>
+            <div className='container-fluid mt-4 mb-3 '>
+
+                <div className="row p-1">
+                    <div className="col-2 p-1"><img className='w-100 rounded' src="https://www.eatwell101.com/wp-content/uploads/2019/07/pasta-salad-recipe-for-lunch.jpg" alt="" /></div>
+                    <div className="col-2 p-1"><img className='w-100 rounded' src="https://www.eatwell101.com/wp-content/uploads/2016/08/one-pot-sausage-casserole-1.jpg" alt="" /></div>
+                    <div className="col-2 p-1"><img className='w-100 rounded' src="https://cdn.loveandlemons.com/wp-content/uploads/2021/01/vegan-breakfast-recipes.jpg" alt="" /></div>
+                    <div className="col-2 p-1"><img className='w-100 rounded' src="https://i.pinimg.com/736x/d3/d2/e1/d3d2e1f956c82b0dca3a7280dd63222f.jpg" alt="" /></div>
+                    <div className="col-2 p-1"><img className='w-100 rounded' src="https://media.istockphoto.com/photos/strawberry-shortcake-on-a-plate-picture-id155036402?k=20&m=155036402&s=612x612&w=0&h=gnWHKysogtu9mFJ68XY9nrACTR0a-0AF2bRSgoEf2-U=" alt="" /></div>
+                    <div className="col-2 p-1"><img className='w-100 rounded' src="https://tse2.mm.bing.net/th/id/OIP.Sf4-JtlgX-gm3BsnN6D_oAHaLG?cb=ucfimg2&ucfimg=1&w=1025&h=1536&rs=1&pid=ImgDetMain&o=7&rm=3" alt="" /></div>
+                </div>
 
             </div>
+
             <Footer />
         </>
     )
