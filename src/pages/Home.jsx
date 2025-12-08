@@ -2,6 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import RecipeCard from '../components/RecipeCard'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClock } from '@fortawesome/free-solid-svg-icons'
 
 function Home() {
     return (
@@ -26,6 +29,7 @@ function Home() {
 
             {/*Home page After login   */}
             <Header />
+            
             <div id='home2' >
                 <div className='container-fluid'>
                     <div className="row pt-lg-5 pt-4 ">
@@ -60,6 +64,34 @@ function Home() {
 
             </div>
 
+
+            <div className='container-fluid'>
+                <div className="row">
+                    <div className="col-md-6">
+                        <div className='d-flex flex-column justify-content-center align-items-center'>
+                            <img src="https://wallpapercave.com/wp/wp9319042.jpg" alt="" className='w-100' />
+                            <h1 style={{ fontWeight: "bold" }}>item?.recipename</h1>
+                            <h5 className='mt-lg-2 mt-1'><FontAwesomeIcon icon={faClock} /> item?.time</h5>
+                            <p className='mt-lg-2 mt-1'><span style={{ fontWeight: "bold" }}>Incredients:</span> item?.incredients</p>
+                            <h5 className='mb-2'>item?.category</h5>
+
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        <div className='d-flex flex-column justify-content-center align-items-center'>
+                            <img src="https://wallpapercave.com/wp/wp9319042.jpg" alt="" className='w-100' />
+                            <h1 style={{ fontWeight: "bold" }}>item?.recipename</h1>
+                            <h5 className='mt-lg-2 mt-1'><FontAwesomeIcon icon={faClock} /> item?.time</h5>
+                            <p className='mt-lg-2 mt-1'><span style={{ fontWeight: "bold" }}>Incredients:</span> item?.incredients</p>
+                            <h5 className='mb-2'>item?.category</h5>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
             <div className='container-fluid mt-4 mb-3 '>
 
                 <div className="row p-1">
@@ -72,6 +104,10 @@ function Home() {
                 </div>
 
             </div>
+
+
+
+
 
             <Footer />
         </>
