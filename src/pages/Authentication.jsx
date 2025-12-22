@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { registerAPI } from '../service/allApi';
+import { loginAPI, registerAPI } from '../service/allApi';
 
 function Authentication({ signup }) {
     const navigate = useNavigate()
@@ -30,6 +30,27 @@ function Authentication({ signup }) {
         }
     }
 
+    const handleLogin = async () => {
+        const { email, password } = authdetails
+        console.log(email, password);
+
+        if (!email || !password) {
+            alert(`Please fill the form completely`)
+        } else {
+            const result = await loginAPI({ email, password })
+            console.log(result);
+            if (result.status == 200) {
+                sessionStorage.setItem("existingUser", JSON.stringify(result.data.existingUser
+                ))
+                sessionStorage.setItem("token", result.data.token)
+                alert(`Login successfull`)
+                navigate('/')
+            } else if (result.status == 406) {
+                alert(`result.response.data`)
+            }
+        }
+    }
+
     return (
         <>
             <div id='loginsignup' className='d-flex justify-content-center align-items-center'>
@@ -45,7 +66,7 @@ function Authentication({ signup }) {
                                 <input type="email" value={authdetails.email} onChange={(e) => setAuthdetails({ ...authdetails, email: e.target.value })} placeholder='Email id' className='form-control p-2 mt-lg-3 mt-2' style={{ borderRadius: "20px" }} />
                                 <input type="password" value={authdetails.password} onChange={(e) => setAuthdetails({ ...authdetails, password: e.target.value })} placeholder='Password' className='form-control p-2  mt-lg-3 mt-2' style={{ borderRadius: "20px" }} />
 
-                                {!signup ? <button type='button' className='btn btn-success p-2 w-100  mt-lg-3 mt-2' style={{ borderRadius: "20px" }} >LOGIN</button> :
+                                {!signup ? <button onClick={handleLogin} type='button' className='btn btn-success p-2 w-100  mt-lg-3 mt-2' style={{ borderRadius: "20px" }} >LOGIN</button> :
 
                                     <button type='button' onClick={handleRegister} className='btn btn-primary p-2 w-100  mt-lg-3 mt-2' style={{ borderRadius: "20px" }} >SIGN UP</button>}
 
