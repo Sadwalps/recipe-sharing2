@@ -5,9 +5,41 @@ import Footer from '../components/Footer'
 import RecipeCard from '../components/RecipeCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock } from '@fortawesome/free-solid-svg-icons'
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 function Home() {
     const [islogin, setIslogin] = useState(false)
+    const [show, setShow] = useState(false);
+
+    const [recipeDeatils, setRecipeDetails] = useState({
+        recipename: "",
+        time: "",
+        incredients: "",
+        category: "",
+        recipeImage: ""
+    })
+    console.log(recipeDeatils);
+
+
+    const handleShow = () => {
+        setShow(true)
+    }
+
+    const handleClose = () => {
+        setShow(false)
+        handleCancel()
+    }
+
+    const handleCancel = () => {
+        setRecipeDetails({
+            recipename: "",
+            time: "",
+            incredients: "",
+            category: "",
+            recipeImage: ""
+        })
+    }
 
     useEffect(() => {
         if (sessionStorage.getItem("token")) {
@@ -16,7 +48,7 @@ function Home() {
             setIslogin(false)
         }
     }, [])
-    
+
     return (
         <>
             {/* Home page before login */}
@@ -51,7 +83,50 @@ function Home() {
                                     </div>
                                     <h1 className='mainhead'>Submit recipes</h1>
                                     <h3 className='text-light ps-lg-1 ps-2' style={{ fontWeight: "bold" }}>Easily share your own recipe on our website </h3>
-                                    <button className='btn btn-info px-lg-5 px-4 py-lg-2 py-2  mt-3 fs-lg-4 fs-5' style={{ borderRadius: "25px", fontWeight: "bold" }}>SUBMIT A RECIPE</button>
+                                    <button onClick={handleShow} className='btn btn-info px-lg-5 px-4 py-lg-2 py-2  mt-3 fs-lg-4 fs-5' style={{ borderRadius: "25px", fontWeight: "bold" }}>SUBMIT A RECIPE</button>
+
+                                    <Modal show={show} onHide={handleClose} size='lg' centered >
+                                        <Modal.Header closeButton style={{ backgroundColor: "rgba(27, 26, 26, 0.93)" }} >
+                                            <Modal.Title style={{ fontWeight: "bold" }} className='text-light'>Share Your Recipe</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body style={{ backgroundColor: "rgba(27, 26, 26, 0.93)" }}>
+                                            <div>
+                                                <div className="row">
+                                                    <div className="col-md-2"></div>
+                                                    <div className="col-md-8 text-center ">
+                                                        <label htmlFor="recipeImage">
+                                                            <input id='recipeImage' type="file" style={{ display: "none" }} />
+                                                            <img src="https://wallpaperaccess.com/full/826948.jpg" alt="" style={{ width: "100%" }} type="file" />
+                                                        </label>
+                                                    </div>
+                                                    <div className="col-md-2"></div>
+                                                </div>
+                                            </div>
+
+                                            <div className='d-flex flex-column justify-content-center align-items-center'>
+                                                <input type="text" value={recipeDeatils.recipename} onChange={(e) => setRecipeDetails({ ...recipeDeatils, recipename: e.target.value })} className='w-75 form-control mt-lg-4 mt-3 text-center' style={{ borderRadius: "15px", fontWeight: "bold" }} placeholder='Name of the Recipe' />
+                                                <input type="text" value={recipeDeatils.time} onChange={(e) => setRecipeDetails({ ...recipeDeatils, time: e.target.value })} className='w-75 form-control mt-lg-4 mt-3 text-center' style={{ borderRadius: "15px", fontWeight: "bold" }} placeholder='Time' />
+                                                <textarea name="" value={recipeDeatils.incredients} onChange={(e) => setRecipeDetails({ ...recipeDeatils, incredients: e.target.value })} className='w-75 form-control mt-lg-4 mt-3 text-center' style={{ borderRadius: "15px", fontWeight: "bold" }} placeholder='Incredients'></textarea>
+                                                <select name="s" value={recipeDeatils.category} onChange={(e) => setRecipeDetails({ ...recipeDeatils, category: e.target.value })} className='w-75 form-control mt-lg-4 mt-3 text-center' style={{ borderRadius: "15px", fontWeight: "bold" }} >
+                                                    <option value="" hidden>Select Category</option>
+                                                    <option value="Vegitarian" style={{ fontWeight: "bold" }}>Vegitarian</option>
+                                                    <option value="NonVegitarian" style={{ fontWeight: "bold" }}>Non Vegitarian</option>
+                                                    <option value="Drinks" style={{ fontWeight: "bold" }}>Drinks</option>
+                                                    <option value="Deserts" style={{ fontWeight: "bold" }}>Deserts</option>
+                                                    <option value="Snacks" style={{ fontWeight: "bold" }}>Snacks</option>
+                                                </select>
+                                            </div>
+
+                                        </Modal.Body>
+                                        <Modal.Footer style={{ backgroundColor: "rgba(27, 26, 26, 0.93)" }}>
+                                            <Button onClick={handleCancel} variant="secondary" className='rounded' >
+                                                Cancel
+                                            </Button>
+                                            <Button variant="success" className='rounded' >
+                                                Submit Recipe
+                                            </Button>
+                                        </Modal.Footer>
+                                    </Modal>
                                     <Link to={'/myrecipes'}><button className='btn btn-primary px-lg-5 px-4 py-lg-2 py-2  mt-3 fs-lg-4 fs-5' style={{ borderRadius: "25px", fontWeight: "bold" }}>Submitted Recipes</button></Link>
                                     <Link to={'/allrecipes'}><button className='btn btn-secondary px-lg-5 px-4 py-lg-2 py-2  mt-3 fs-lg-4 fs-5' style={{ borderRadius: "25px", fontWeight: "bold" }}>All Recipes</button></Link>
                                 </div>
@@ -116,8 +191,6 @@ function Home() {
 
                     </div>
                 </div>}
-
-
 
 
             <Footer />
