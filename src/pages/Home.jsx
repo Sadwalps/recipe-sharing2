@@ -7,19 +7,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock } from '@fortawesome/free-solid-svg-icons'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { addRecipeAPI } from '../service/allApi'
 
 function Home() {
     const [islogin, setIslogin] = useState(false)
     const [show, setShow] = useState(false);
+    const [key, setKey] = useState(1)
+     const [token, setToken] = useState("")
+    const [preview, setPreview] = useState("")
+    console.log(preview);
 
-    const [recipeDeatils, setRecipeDetails] = useState({
+
+    const [recipeDetails, setRecipeDetails] = useState({
         recipename: "",
         time: "",
         incredients: "",
         category: "",
         recipeImage: ""
     })
-    console.log(recipeDeatils);
+    console.log(recipeDetails);
 
 
     const handleShow = () => {
@@ -39,6 +45,54 @@ function Home() {
             category: "",
             recipeImage: ""
         })
+        setPreview("")
+        if (key == 1) {
+            setKey(0)
+        } else {
+            setKey(1)
+        }
+    }
+
+    const handleFile = (e) => {
+        console.log(e.target.files[0]);
+        setRecipeDetails({ ...recipeDetails, recipeImage: e.target.files[0] })
+
+    }
+
+    const handleAdd = async () => {
+        const { recipename, time, incredients, category, recipeImage } = recipeDetails
+        console.log(recipename, time, incredients, category, recipeImage);
+        if (!recipename || !time || !incredients || !category) {
+            alert(`Fill the completely`)
+        } else {
+
+            const reqBody = new FormData()
+            reqBody.append("recipename", recipename)
+            reqBody.append("time", time)
+            reqBody.append("incredients", incredients)
+            reqBody.append("category", category)
+            reqBody.append("recipeImage", recipeImage)
+            
+            if (token) {
+                const reqHeader = {
+                    "Content-Type": "multipart/form-data",
+                    "Authorization": `Bearer ${token}`
+                }
+                const result = await addRecipeAPI(reqBody, reqHeader)
+                console.log(result);
+                if (result.status == 200) {
+                    alert(`Recipe added Successfully `)
+                    setTimeout(() => {
+                        handleClose()
+                    }, 2000)
+                } else if (result.status == 406) {
+                    alert(result.response.data)
+
+                } else {
+                    alert(`Something went wrong`)
+                }
+            }
+        }
     }
 
     useEffect(() => {
@@ -48,6 +102,18 @@ function Home() {
             setIslogin(false)
         }
     }, [])
+
+     useEffect(() => {
+    if (sessionStorage.getItem("token")) {
+      setToken(sessionStorage.getItem("token"))
+    }
+  }, [])
+
+    useEffect(() => {
+        if (recipeDetails.recipeImage) {
+            setPreview(URL.createObjectURL(recipeDetails.recipeImage))
+        }
+    }, [recipeDetails.recipeImage])
 
     return (
         <>
@@ -95,8 +161,8 @@ function Home() {
                                                     <div className="col-md-2"></div>
                                                     <div className="col-md-8 text-center ">
                                                         <label htmlFor="recipeImage">
-                                                            <input id='recipeImage' type="file" style={{ display: "none" }} />
-                                                            <img src="https://wallpaperaccess.com/full/826948.jpg" alt="" style={{ width: "100%" }} type="file" />
+                                                            <input key={key} id='recipeImage' onChange={(e) => handleFile(e)} type="file" style={{ display: "none" }} />
+                                                            <img src={preview ? preview : "https://wallpaperaccess.com/full/826948.jpg"} alt="" style={{ width: "100%" }} type="file" />
                                                         </label>
                                                     </div>
                                                     <div className="col-md-2"></div>
@@ -104,10 +170,10 @@ function Home() {
                                             </div>
 
                                             <div className='d-flex flex-column justify-content-center align-items-center'>
-                                                <input type="text" value={recipeDeatils.recipename} onChange={(e) => setRecipeDetails({ ...recipeDeatils, recipename: e.target.value })} className='w-75 form-control mt-lg-4 mt-3 text-center' style={{ borderRadius: "15px", fontWeight: "bold" }} placeholder='Name of the Recipe' />
-                                                <input type="text" value={recipeDeatils.time} onChange={(e) => setRecipeDetails({ ...recipeDeatils, time: e.target.value })} className='w-75 form-control mt-lg-4 mt-3 text-center' style={{ borderRadius: "15px", fontWeight: "bold" }} placeholder='Time' />
-                                                <textarea name="" value={recipeDeatils.incredients} onChange={(e) => setRecipeDetails({ ...recipeDeatils, incredients: e.target.value })} className='w-75 form-control mt-lg-4 mt-3 text-center' style={{ borderRadius: "15px", fontWeight: "bold" }} placeholder='Incredients'></textarea>
-                                                <select name="s" value={recipeDeatils.category} onChange={(e) => setRecipeDetails({ ...recipeDeatils, category: e.target.value })} className='w-75 form-control mt-lg-4 mt-3 text-center' style={{ borderRadius: "15px", fontWeight: "bold" }} >
+                                                <input type="text" value={recipeDetails.recipename} onChange={(e) => setRecipeDetails({ ...recipeDetails, recipename: e.target.value })} className='w-75 form-control mt-lg-4 mt-3 text-center' style={{ borderRadius: "15px", fontWeight: "bold" }} placeholder='Name of the Recipe' />
+                                                <input type="text" value={recipeDetails.time} onChange={(e) => setRecipeDetails({ ...recipeDetails, time: e.target.value })} className='w-75 form-control mt-lg-4 mt-3 text-center' style={{ borderRadius: "15px", fontWeight: "bold" }} placeholder='Time' />
+                                                <textarea name="" value={recipeDetails.incredients} onChange={(e) => setRecipeDetails({ ...recipeDetails, incredients: e.target.value })} className='w-75 form-control mt-lg-4 mt-3 text-center' style={{ borderRadius: "15px", fontWeight: "bold" }} placeholder='Incredients'></textarea>
+                                                <select name="s" value={recipeDetails.category} onChange={(e) => setRecipeDetails({ ...recipeDetails, category: e.target.value })} className='w-75 form-control mt-lg-4 mt-3 text-center' style={{ borderRadius: "15px", fontWeight: "bold" }} >
                                                     <option value="" hidden>Select Category</option>
                                                     <option value="Vegitarian" style={{ fontWeight: "bold" }}>Vegitarian</option>
                                                     <option value="NonVegitarian" style={{ fontWeight: "bold" }}>Non Vegitarian</option>
@@ -122,7 +188,7 @@ function Home() {
                                             <Button onClick={handleCancel} variant="secondary" className='rounded' >
                                                 Cancel
                                             </Button>
-                                            <Button variant="success" className='rounded' >
+                                            <Button onClick={handleAdd} variant="success" className='rounded' >
                                                 Submit Recipe
                                             </Button>
                                         </Modal.Footer>

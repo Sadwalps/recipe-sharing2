@@ -10,3 +10,8 @@ export const registerAPI = async (reqBody) => {
 export const loginAPI = async (reqBody) => {
     return await commonAPI(`POST`, `${serverURL}/login`, reqBody,"")
 }
+
+//api for add recipe
+export const addRecipeAPI =async(reqBody, reqHeader)=>{
+    return await commonAPI(`POST`, `${serverURL}/add-recipe`, reqBody, reqHeader)
+}
