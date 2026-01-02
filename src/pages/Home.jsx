@@ -7,15 +7,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock } from '@fortawesome/free-solid-svg-icons'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { addRecipeAPI } from '../service/allApi'
+import { addRecipeAPI, getHomeRecipeAPI } from '../service/allApi'
+import { serverURL } from '../service/serverUrl'
 
 function Home() {
     const [islogin, setIslogin] = useState(false)
     const [show, setShow] = useState(false);
     const [key, setKey] = useState(1)
-     const [token, setToken] = useState("")
+    const [token, setToken] = useState("")
     const [preview, setPreview] = useState("")
     console.log(preview);
+    const [homeRecipes, setHomeRecipes] = useState([])
+    console.log(homeRecipes);
 
 
     const [recipeDetails, setRecipeDetails] = useState({
@@ -72,7 +75,7 @@ function Home() {
             reqBody.append("incredients", incredients)
             reqBody.append("category", category)
             reqBody.append("recipeImage", recipeImage)
-            
+
             if (token) {
                 const reqHeader = {
                     "Content-Type": "multipart/form-data",
@@ -95,6 +98,13 @@ function Home() {
         }
     }
 
+
+    const getallrecipes = async () => {
+        const result = await getHomeRecipeAPI()
+        console.log(result);
+        setHomeRecipes(result.data)
+    }
+
     useEffect(() => {
         if (sessionStorage.getItem("token")) {
             setIslogin(true)
@@ -103,17 +113,21 @@ function Home() {
         }
     }, [])
 
-     useEffect(() => {
-    if (sessionStorage.getItem("token")) {
-      setToken(sessionStorage.getItem("token"))
-    }
-  }, [])
+    useEffect(() => {
+        if (sessionStorage.getItem("token")) {
+            setToken(sessionStorage.getItem("token"))
+        }
+    }, [])
 
     useEffect(() => {
         if (recipeDetails.recipeImage) {
             setPreview(URL.createObjectURL(recipeDetails.recipeImage))
         }
     }, [recipeDetails.recipeImage])
+
+    useEffect(() => {
+        getallrecipes()
+    }, [])
 
     return (
         <>
@@ -219,26 +233,16 @@ function Home() {
 
                     <div className='container-fluid'>
                         <div className="row">
-                            <div className="col-md-6">
+                           {homeRecipes?.map((item)=>( <div className="col-md-6">
                                 <div className='d-flex flex-column justify-content-center align-items-center'>
-                                    <img src="https://wallpapercave.com/wp/wp9319042.jpg" alt="" className='w-100' />
-                                    <h1 style={{ fontWeight: "bold" }}>item?.recipename</h1>
-                                    <h5 className='mt-lg-2 mt-1'><FontAwesomeIcon icon={faClock} /> item?.time</h5>
-                                    <p className='mt-lg-2 mt-1'><span style={{ fontWeight: "bold" }}>Incredients:</span> item?.incredients</p>
-                                    <h5 className='mb-2'>item?.category</h5>
-
+                                    <img src={`${serverURL}/upload/${item?.recipeImage}`} alt="" className='w-100' />
+                                    <h1 style={{ fontWeight: "bold" }}>Recipename: {item?.recipename}</h1>
+                                    <h5 className='mt-lg-2 mt-1'><FontAwesomeIcon icon={faClock} />Time: {item?.time}</h5>
+                                    <p className='mt-lg-2 mt-1'><span style={{ fontWeight: "bold" }}>Incredients:</span> {item?.incredients}</p>
+                                    <h5 className='mb-2'>Category: {item?.category}</h5>
                                 </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className='d-flex flex-column justify-content-center align-items-center'>
-                                    <img src="https://wallpapercave.com/wp/wp9319042.jpg" alt="" className='w-100' />
-                                    <h1 style={{ fontWeight: "bold" }}>item?.recipename</h1>
-                                    <h5 className='mt-lg-2 mt-1'><FontAwesomeIcon icon={faClock} /> item?.time</h5>
-                                    <p className='mt-lg-2 mt-1'><span style={{ fontWeight: "bold" }}>Incredients:</span> item?.incredients</p>
-                                    <h5 className='mb-2'>item?.category</h5>
-
-                                </div>
-                            </div>
+                            </div>))}
+                            
                         </div>
 
                     </div>
