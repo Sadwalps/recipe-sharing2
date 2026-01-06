@@ -22,7 +22,17 @@ export const getHomeRecipeAPI = async () => {
 }
 
 //api for get user recipes
-export const getUserRecipeAPI = async(reqHeader)=>{
-return await commonAPI(`GET`, `${serverURL}/user-recipe`, "", reqHeader)
+export const getUserRecipeAPI = async (reqHeader) => {
+    return await commonAPI(`GET`, `${serverURL}/user-recipe`, "", reqHeader)
+}
+
+//api for delete user recipes
+export const deleteUserRecipeAPI = async (id, reqHeader) => {
+    return await commonAPI(`DELETE`, `${serverURL}/delete-recipe/${id}`, {}, reqHeader)
+}
+
+//api for get all recipes
+export const getAllRecipeAPI = async (searchKey,reqHeader) => {
+    return await commonAPI(`GET`, `${serverURL}/all-recipes?search=${searchKey}`, "", reqHeader)
 }
 

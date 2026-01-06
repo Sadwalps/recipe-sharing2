@@ -87,7 +87,7 @@ function Home() {
                     alert(`Recipe added Successfully `)
                     setTimeout(() => {
                         handleClose()
-                    }, 2000)
+                    }, 1000)
                 } else if (result.status == 406) {
                     alert(result.response.data)
 

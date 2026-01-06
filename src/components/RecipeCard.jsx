@@ -1,10 +1,30 @@
 import { faClock, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Edit from './Edit'
 import { serverURL } from '../service/serverUrl'
+import { deleteUserRecipeAPI } from '../service/allApi'
 
-function RecipeCard({recipes}) {
+function RecipeCard({ recipes, setDeleteRecipeStatus }) {
+
+    const handleDelete = async (id) => {
+        if (sessionStorage.getItem("token")) {
+            const token = sessionStorage.getItem("token")
+            const reqHeader = {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+            const result = await deleteUserRecipeAPI(id, reqHeader)
+            console.log(result);
+            if (result.status == 200) {
+                alert(result.data)
+                setDeleteRecipeStatus(result)
+            }
+        }
+    }
+
+
+
     return (
         <>
             <div className='mt-3 mb-3' >
@@ -21,8 +41,9 @@ function RecipeCard({recipes}) {
                             <h5 className='mb-2'>{recipes?.category}</h5>
 
                             <div className='d-flex justify-content-between'>
-                                 <Edit />
-                                <div className='coveringdiv'> <div className='bg-danger  d-flex justify-content-center align-items-center rounded' id='deletebutton'><FontAwesomeIcon icon={faTrash} style={{ color: "black" }} /></div>  </div>
+                                <Edit />
+                                <div className='coveringdiv'> <div onClick={() => handleDelete(recipes?._id)} className='bg-danger  d-flex justify-content-center align-items-center rounded' id='deletebutton'><FontAwesomeIcon icon={faTrash} style={{ color: "black" }} /></div>  </div>
+
 
                             </div>
                         </div>

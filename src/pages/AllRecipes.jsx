@@ -1,11 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock } from '@fortawesome/free-solid-svg-icons'
 import RecipeCard from '../components/RecipeCard'
 import Footer from '../components/Footer'
+import { getAllRecipeAPI } from '../service/allApi'
 
 function AllRecipes() {
+    const [token, setToken] = useState("")
+    const [allRecipes, setAllRecieps] = useState([])
+    console.log(allRecipes);
+    
+    const [searchKey, setSearchKey] = useState("")
+     console.log(searchKey);
+
+    const getAllRecipes = async () => {
+        if (sessionStorage.getItem("token")) {
+            const token = sessionStorage.getItem("token")
+
+            const reqHeader = {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+            const result = await getAllRecipeAPI(searchKey,reqHeader)
+          
+                setAllRecieps(result.data)
+        
+        }
+    }
+
+    useEffect(() => {
+        getAllRecipes()
+        if (sessionStorage.getItem("token")) {
+            setToken(sessionStorage.getItem("token"))
+        }
+    }, [searchKey])
     return (
         <>
             <Header />
@@ -53,16 +82,16 @@ function AllRecipes() {
                 </div>
             </div>
 
-            <div className='container-fluid'>
-                <div className="row">
+          { token? <div className='container-fluid'>
+                {allRecipes?.map((item)=>(<div className="row">
                     <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
                     <div className="col-lg-8 col-md-8 col-sm-8 col-12">
-                        <RecipeCard />
-                        <RecipeCard />
+                        <RecipeCard recipes={item} />
+                        
                     </div>
                     <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
-                </div>
-            </div>
+                </div>))}
+            </div>:
             <div style={{ minHeight: "68vh" }}>
                 <div className='container-fluid ' style={{ height: "65vh" }}>
                     <div className="row">
@@ -74,7 +103,7 @@ function AllRecipes() {
                         <div className="col-3"></div>
                     </div>
                 </div>
-            </div>
+            </div>}
             <Footer />
         </>
     )
