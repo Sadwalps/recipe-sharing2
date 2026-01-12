@@ -8,6 +8,7 @@ function MyRecipes() {
 
     const [userRecipes, setUserRecipes] = useState([])
     const [deleteRecipeStatus, setDeleteRecipeStatus] = useState({})
+    const [editStatus, setEditStatus] = useState({})
     console.log(userRecipes);
 
     const getuserrecipes = async () => {
@@ -26,7 +27,7 @@ function MyRecipes() {
 
     useEffect(() => {
         getuserrecipes()
-    }, [deleteRecipeStatus])
+    }, [deleteRecipeStatus,editStatus])
 
     return (
         <>
@@ -35,7 +36,7 @@ function MyRecipes() {
                 {userRecipes?.map((item) => (<div className="row">
                     <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
                     <div className="col-lg-8 col-md-8 col-sm-8 col-12">
-                        <RecipeCard recipes={item} setDeleteRecipeStatus={setDeleteRecipeStatus} />
+                        <RecipeCard recipes={item} setDeleteRecipeStatus={setDeleteRecipeStatus} setEditStatus={setEditStatus} />
                     </div>
                     <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
                 </div>))}

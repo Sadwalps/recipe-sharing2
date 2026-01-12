@@ -5,7 +5,7 @@ import Edit from './Edit'
 import { serverURL } from '../service/serverUrl'
 import { deleteUserRecipeAPI } from '../service/allApi'
 
-function RecipeCard({ recipes, setDeleteRecipeStatus }) {
+function RecipeCard({ recipes, setDeleteRecipeStatus ,setEditStatus}) {
 
     const handleDelete = async (id) => {
         if (sessionStorage.getItem("token")) {
@@ -41,7 +41,7 @@ function RecipeCard({ recipes, setDeleteRecipeStatus }) {
                             <h5 className='mb-2'>{recipes?.category}</h5>
 
                             <div className='d-flex justify-content-between'>
-                                <Edit />
+                                <Edit recipes={recipes} setEditStatus={setEditStatus} />
                                 <div className='coveringdiv'> <div onClick={() => handleDelete(recipes?._id)} className='bg-danger  d-flex justify-content-center align-items-center rounded' id='deletebutton'><FontAwesomeIcon icon={faTrash} style={{ color: "black" }} /></div>  </div>
 
 

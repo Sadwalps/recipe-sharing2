@@ -32,7 +32,12 @@ export const deleteUserRecipeAPI = async (id, reqHeader) => {
 }
 
 //api for get all recipes
-export const getAllRecipeAPI = async (searchKey,reqHeader) => {
+export const getAllRecipeAPI = async (searchKey, reqHeader) => {
     return await commonAPI(`GET`, `${serverURL}/all-recipes?search=${searchKey}`, "", reqHeader)
+}
+
+//api for update user recipes
+export const UpdateUserRecipeAPI = async (id, reqBody, reqHeader) => {
+    return await commonAPI(`PUT`, `${serverURL}/update-userrecipe/${id}`, reqBody, reqHeader)
 }
 
