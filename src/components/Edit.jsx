@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
@@ -6,7 +6,9 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { serverURL } from '../service/serverUrl';
 import { UpdateUserRecipeAPI } from '../service/allApi';
-function Edit({ recipes, setEditStatus }) {
+import { editResponseContent } from '../context/ContextShare';
+function Edit({ recipes }) {
+  const { setEditResponse } = useContext(editResponseContent)
   const [show, setShow] = useState(false);
   const [recipeDetails, setRecipeDetails] = useState({
     recipename: recipes?.recipename,
@@ -69,7 +71,7 @@ function Edit({ recipes, setEditStatus }) {
         const result = await UpdateUserRecipeAPI(recipes._id, reqBody, reqHeader)
         console.log(result);
         if (result.status == 200) {
-          setEditStatus(result)
+          setEditResponse(result)
           alert(`Recipe successfully updated`)
           setTimeout(() => {
             handleClose()
@@ -88,7 +90,7 @@ function Edit({ recipes, setEditStatus }) {
         const result = await UpdateUserRecipeAPI(recipes._id, reqBody, reqHeader)
         console.log(result);
         if (result.status == 200) {
-          setEditStatus(result)
+          setEditResponse(result)
           alert(`Recipe successfully updated`)
           setTimeout(() => {
             handleClose()
