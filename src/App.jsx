@@ -7,9 +7,11 @@ import PageNotFound from './pages/PageNotFound'
 import AdminDashboard from './pages/AdminDashboard'
 import MyRecipes from './pages/MyRecipes'
 import AllRecipes from './pages/AllRecipes'
+import { loginResponseContext } from './context/ContextShare'
+import { useContext } from 'react'
 
 function App() {
-
+  const { loginResponse } = useContext(loginResponseContext)
   return (
     <>
       <Routes>
@@ -18,8 +20,8 @@ function App() {
         <Route path='/signup' element={<Authentication signup={true} />} />
         <Route path='/login' element={<Authentication />} />
         <Route path='/admin' element={<AdminDashboard />} />
-        <Route path='/myrecipes' element={<MyRecipes />} />
-        <Route path='/allrecipes' element={<AllRecipes />} />
+        <Route path='/myrecipes' element={loginResponse ? <MyRecipes /> : <PageNotFound />} />
+        <Route path='/allrecipes' element={loginResponse ? <AllRecipes /> : <PageNotFound />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </>

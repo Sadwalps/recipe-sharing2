@@ -59,7 +59,6 @@ function Home() {
     const handleFile = (e) => {
         console.log(e.target.files[0]);
         setRecipeDetails({ ...recipeDetails, recipeImage: e.target.files[0] })
-
     }
 
     const handleAdd = async () => {
@@ -98,20 +97,11 @@ function Home() {
         }
     }
 
-
     const getallrecipes = async () => {
         const result = await getHomeRecipeAPI()
         console.log(result);
         setHomeRecipes(result.data)
     }
-
-    useEffect(() => {
-        if (sessionStorage.getItem("token")) {
-            setIslogin(true)
-        } else {
-            setIslogin(false)
-        }
-    }, [])
 
     useEffect(() => {
         if (sessionStorage.getItem("token")) {
@@ -127,7 +117,21 @@ function Home() {
 
     useEffect(() => {
         getallrecipes()
+
+        if (sessionStorage.getItem("token")) {
+            setIslogin(true)
+        } else {
+            setIslogin(false)
+        }
     }, [])
+
+    useEffect(() => {
+        if (sessionStorage.getItem("token")) {
+            setIslogin(true)
+        } else {
+            setIslogin(false)
+        }
+    })
 
     return (
         <>
@@ -233,7 +237,7 @@ function Home() {
 
                     <div className='container-fluid'>
                         <div className="row">
-                           {homeRecipes?.map((item)=>( <div className="col-md-6">
+                            {homeRecipes?.map((item) => (<div className="col-md-6">
                                 <div className='d-flex flex-column justify-content-center align-items-center'>
                                     <img src={`${serverURL}/upload/${item?.recipeImage}`} alt="" className='w-100' />
                                     <h1 style={{ fontWeight: "bold" }}>Recipename: {item?.recipename}</h1>
@@ -242,7 +246,7 @@ function Home() {
                                     <h5 className='mb-2'>Category: {item?.category}</h5>
                                 </div>
                             </div>))}
-                            
+
                         </div>
 
                     </div>
