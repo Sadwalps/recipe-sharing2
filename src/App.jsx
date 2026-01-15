@@ -9,6 +9,7 @@ import MyRecipes from './pages/MyRecipes'
 import AllRecipes from './pages/AllRecipes'
 import { loginResponseContext } from './context/ContextShare'
 import { useContext } from 'react'
+import AdminAuthentication from './pages/AdminAuthentication'
 
 function App() {
   const { loginResponse } = useContext(loginResponseContext)
@@ -18,6 +19,8 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/selectUserPage' element={<SelectUserPage />} />
         <Route path='/signup' element={<Authentication signup={true} />} />
+        <Route path='/adminSignup' element={<AdminAuthentication adminSignup={true} />} />
+         <Route path='/adminLogin' element={<AdminAuthentication />} />
         <Route path='/login' element={<Authentication />} />
         <Route path='/admin' element={<AdminDashboard />} />
         <Route path='/myrecipes' element={loginResponse ? <MyRecipes /> : <PageNotFound />} />
