@@ -41,3 +41,8 @@ export const UpdateUserRecipeAPI = async (id, reqBody, reqHeader) => {
     return await commonAPI(`PUT`, `${serverURL}/update-userrecipe/${id}`, reqBody, reqHeader)
 }
 
+//api for admin register
+export const adminRegisterAPI  = async(reqBody)=>{
+    return await commonAPI(`POST`, `${serverURL}/admin-register`, reqBody)
+}
+
