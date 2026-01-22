@@ -46,7 +46,9 @@ function Authentication({ signup }) {
                 alert(`Login successfull`)
                 navigate('/')
             } else if (result.status == 406) {
-                alert(`result.response.data`)
+                alert(result.response.data)
+            } else {
+                alert(`Something went wrong`)
             }
         }
     }

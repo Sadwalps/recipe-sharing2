@@ -109,12 +109,13 @@
 }
 
 /* Edit  */
-#editbutton{
-    height:35px;
+#editbutton {
+    height: 35px;
     width: 35px;
     font-size: x-large;
 }
-#editbutton:hover{
+
+#editbutton:hover {
     height: 42px;
     width: 42px;
     font-size: xx-large;
@@ -126,9 +127,26 @@
     font-weight: bold;
 }
 
+/* admin dashboard */
+.adminpagesmallscreen {
+    display: none;
+}
 
 
 /* media query */
+
+@media screen and (max-width:767px) {
+    .adminpagelargescreen {
+        display: none;
+    }
+
+    .adminpagesmallscreen {
+        display: block;
+
+    }
+}
+
+
 @media screen and (max-width:480px) {
     #home {
 

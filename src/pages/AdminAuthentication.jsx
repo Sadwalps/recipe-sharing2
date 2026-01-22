@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { adminRegisterAPI } from '../service/allApi';
+import { adminLoginAPI, adminRegisterAPI } from '../service/allApi';
 
 function AdminAuthentication({ adminSignup }) {
     const navigate = useNavigate()
@@ -32,6 +32,30 @@ function AdminAuthentication({ adminSignup }) {
 
     }
 
+    const handleLogin = async () => {
+        const { email, password } = adminDetails
+        console.log(email, password);
+
+        if (!email || !password) {
+            alert(`Fill the form completely`)
+        } else {
+            const result = await adminLoginAPI({ email, password })
+            console.log(result);
+
+            if (result.status == 200) {
+                sessionStorage.setItem("existingAdmin", JSON.stringify(result.data.existingAdmin))
+                sessionStorage.setItem("token", result.data.token)
+                alert(`Login successfull`)
+                navigate('/admin')
+            } else if (result.status == 406) {
+                alert(result.response.data)
+            } else {
+                alert(`Something went wrong`)
+            }
+        }
+
+    }
+
 
     return (
         <>
@@ -50,7 +74,7 @@ function AdminAuthentication({ adminSignup }) {
                                 <input value={adminDetails.email} onChange={(e) => setAdminDetails({ ...adminDetails, email: e.target.value })} type="email" placeholder='Email id' className='form-control p-2 mt-lg-3 mt-2' style={{ borderRadius: "20px" }} />
                                 <input value={adminDetails.password} onChange={(e) => setAdminDetails({ ...adminDetails, password: e.target.value })} type="password" placeholder='Password' className='form-control p-2  mt-lg-3 mt-2' style={{ borderRadius: "20px" }} />
 
-                                {!adminSignup ? <button type='button' className='btn btn-success p-2 w-100  mt-lg-3 mt-2' style={{ borderRadius: "20px" }} >LOGIN</button> :
+                                {!adminSignup ? <button onClick={handleLogin} type='button' className='btn btn-success p-2 w-100  mt-lg-3 mt-2' style={{ borderRadius: "20px" }} >LOGIN</button> :
 
                                     <button onClick={handleRegister} type='button' className='btn btn-primary p-2 w-100  mt-lg-3 mt-2' style={{ borderRadius: "20px" }} >SIGN UP</button>}
 
