@@ -51,3 +51,8 @@ export const adminLoginAPI = async (reqBody) => {
     return await commonAPI(`POST`, `${serverURL}/admin-login`, reqBody, "")
 }
 
+//api for get all users details
+export const getAllUsersDetailsAPI = async () => {
+    return await commonAPI(`GET`, `${serverURL}/all-users`)
+}
+
