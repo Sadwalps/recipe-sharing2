@@ -19,6 +19,8 @@ function RecipeCard({ recipes, setDeleteRecipeStatus ,setEditStatus}) {
             if (result.status == 200) {
                 alert(result.data)
                 setDeleteRecipeStatus(result)
+            }else{
+                alert(`Something went wrong`)
             }
         }
     }

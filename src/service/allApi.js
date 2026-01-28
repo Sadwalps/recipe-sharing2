@@ -56,3 +56,8 @@ export const getAllUsersDetailsAPI = async () => {
     return await commonAPI(`GET`, `${serverURL}/all-users`)
 }
 
+//api for delete user
+export const deleteUserAPI = async(id, reqHeader)=>{
+    return await commonAPI(`DELETE`, `${serverURL}/delete-user/${id}`,{}, reqHeader)
+}
+
