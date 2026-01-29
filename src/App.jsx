@@ -20,9 +20,9 @@ function App() {
         <Route path='/selectUserPage' element={<SelectUserPage />} />
         <Route path='/signup' element={<Authentication signup={true} />} />
         <Route path='/adminSignup' element={<AdminAuthentication adminSignup={true} />} />
-         <Route path='/adminLogin' element={<AdminAuthentication />} />
+        <Route path='/adminLogin' element={<AdminAuthentication />} />
         <Route path='/login' element={<Authentication />} />
-        <Route path='/admin' element={<AdminDashboard />} />
+        <Route path='/admin' element={loginResponse ? <AdminDashboard /> : <PageNotFound />} />
         <Route path='/myrecipes' element={loginResponse ? <MyRecipes /> : <PageNotFound />} />
         <Route path='/allrecipes' element={loginResponse ? <AllRecipes /> : <PageNotFound />} />
         <Route path='*' element={<PageNotFound />} />

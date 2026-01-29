@@ -1,12 +1,16 @@
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPowerOff, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
 import { deleteUserAPI, getAllUsersDetailsAPI } from '../service/allApi';
+import { useNavigate } from 'react-router-dom';
+import { loginResponseContext } from '../context/ContextShare';
 function AdminDashboard() {
-
+  const { setLoginResponse } = useContext(loginResponseContext)
   const [allUsersDetails, setAllUsersDetails] = useState([])
   const [deleteUserStatus, setDeleteUserStatus] = useState("")
+  const [token, setToken] = useState("")
+  const navigate = useNavigate()
   const getallusersdetails = async () => {
     const result = await getAllUsersDetailsAPI()
     console.log(result);
@@ -33,6 +37,23 @@ function AdminDashboard() {
     }
   }
 
+
+
+  useEffect(() => {
+    if (sessionStorage.getItem("token")) {
+      setToken(sessionStorage.getItem("token"))
+    }
+  })
+
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("existingUser")
+    sessionStorage.removeItem("token")
+    setLoginResponse(false)
+    alert(`Logging out`)
+    navigate('/')
+  }
+
   useEffect(() => {
     getallusersdetails()
   }, [deleteUserStatus])
@@ -50,10 +71,14 @@ function AdminDashboard() {
 
             <div className="col-lg-10 col-md-10 col-12 p-0 ">
 
-              <div className='  bg-dark' style={{ minHeight: "10vh" }}>
+              <div className='d-flex justify-content-between align-items-center px-3 bg-dark' style={{ minHeight: "10vh" }}>
 
                 <div className='d-flex justify-content-center align-items-center gap-3 w-25' style={{ minHeight: "10vh" }}>
                   <img className='' src="https://cdn-icons-png.freepik.com/512/10840/10840480.png" alt="app img" style={{ height: "45", width: "45px" }} />
+
+                </div>
+                <div onClick={handleLogout} id='logoutdiv'  >
+                  <FontAwesomeIcon icon={faPowerOff} />
                 </div>
 
               </div>
