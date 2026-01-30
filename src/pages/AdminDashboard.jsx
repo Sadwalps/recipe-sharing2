@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useContext, useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
 import { deleteUserAPI, getAllUsersDetailsAPI } from '../service/allApi';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginResponseContext } from '../context/ContextShare';
 function AdminDashboard() {
   const { setLoginResponse } = useContext(loginResponseContext)
@@ -101,7 +101,8 @@ function AdminDashboard() {
                         <td>{index + 1}</td>
                         <td>{item?.username}</td>
                         <td>{item?.email}</td>
-                        <td><button onClick={() => handleDelete(item?._id)} className='btn btn-danger p-1    rounded'>
+                        <td><Link ><button className='btn btn-sm btn-primary rounded'>View Recipes</button></Link></td>
+                        <td><button onClick={() => handleDelete(item?._id)} className='btn btn-danger p-1  rounded'>
                           <FontAwesomeIcon icon={faTrash} />
                         </button></td>
 
@@ -123,6 +124,7 @@ function AdminDashboard() {
                     <button onClick={() => handleDelete(item?._id)} className='btn btn-danger  fs-6      rounded' style={{ position: "absolute", top: "2px", right: "5px", fontWeight: "bold" }}>
                       <FontAwesomeIcon icon={faTrash} />
                     </button>
+                    <Link ><button className='btn btn-sm btn-primary rounded' style={{ position: "absolute", bottom: "2px", right: "5px", fontWeight: "bold" }}>View Recipes</button></Link>
                   </div>))}
                 </div>
               </div> :
