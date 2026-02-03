@@ -1,12 +1,12 @@
-import { faPowerOff, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faBowlFood, faPowerOff, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useContext, useEffect, useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
 import { deleteUserAPI, getAllUsersDetailsAPI } from '../service/allApi';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginResponseContext } from '../context/ContextShare';
+
 function AdminDashboard() {
-  const { setLoginResponse } = useContext(loginResponseContext)
+  
   const [allUsersDetails, setAllUsersDetails] = useState([])
   const [deleteUserStatus, setDeleteUserStatus] = useState("")
   const [token, setToken] = useState("")
@@ -46,19 +46,14 @@ function AdminDashboard() {
   })
 
 
-  const handleLogout = () => {
-    sessionStorage.removeItem("existingUser")
-    sessionStorage.removeItem("token")
-    setLoginResponse(false)
-    alert(`Logging out`)
-    navigate('/')
-  }
+
 
   useEffect(() => {
     getallusersdetails()
   }, [deleteUserStatus])
   return (
     <>
+
       <div >
         <div className='container-fluid'>
           <div className="row">
@@ -77,8 +72,21 @@ function AdminDashboard() {
                   <img className='' src="https://cdn-icons-png.freepik.com/512/10840/10840480.png" alt="app img" style={{ height: "45", width: "45px" }} />
 
                 </div>
-                <div onClick={handleLogout} id='logoutdiv'  >
+                <div  id='logoutdiv'  >
                   <FontAwesomeIcon icon={faPowerOff} />
+                </div>
+
+              </div>
+
+
+              {/* All recipes button */}
+              <div className='container-fluid mt-4 mb-4'>
+                <div className="row">
+                  <div className="col-md-2"></div>
+                  <div className="col-md-8">
+                   <Link to={'/adminallrecipes'}><button className='btn btn-lg btn-info rounded py-3 w-100 ' style={{fontWeight:"bold"}}><FontAwesomeIcon icon={faBowlFood} className='me-3' />View All Recipes</button></Link> 
+                  </div>
+                  <div className="col-md-2"></div>
                 </div>
 
               </div>
@@ -130,7 +138,7 @@ function AdminDashboard() {
               </div> :
 
                 <div>
-                  <h2>sakjskdaksjldkajlksjdka</h2>
+                   <h1 className='text-center ' style={{ fontWeight: "bold" }}>No User yet!!!</h1>
                 </div>}
 
             </div>
