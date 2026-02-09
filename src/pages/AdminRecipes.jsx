@@ -2,6 +2,8 @@ import React from 'react'
 
 import Footer from '../components/Footer'
 import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 
 function AdminRecipes() {
@@ -15,14 +17,30 @@ function AdminRecipes() {
 
             </div>
 
+
+
             {/* recipes */}
             <div className='container-fluid'>
                 <div className="row">
-                    <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
-                    <div className="col-lg-8 col-md-8 col-sm-8 col-12">
-
+                    <div className="col-md-1"></div>
+                    <div className="col-md-5">
+                        <div>
+                            <Card style={{ width: '100%' }}>
+                                <Card.Img variant="top" src="holder.js/100px180" />
+                                <Card.Body>
+                                    <Card.Title>Card Title</Card.Title>
+                                    <Card.Text>
+                                        Some quick example text to build on the card title and make up the
+                                        bulk of the card's content.
+                                    </Card.Text>
+                                    <Button variant="primary">Go somewhere</Button>
+                                </Card.Body>
+                            </Card>
+                        </div>
                     </div>
-                    <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
+                    <div className="col-md-1"></div>
+                    <div className="col-md-4"></div>
+                    <div className="col-md-1"></div>
                 </div>
             </div>
             <div style={{ minHeight: "69vh" }}>
