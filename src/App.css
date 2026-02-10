@@ -135,6 +135,13 @@
 }
 
 
+.adminrecipepage{
+    background-image: url(https://wallpaperaccess.com/full/1462457.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 30rem;
+}
+
 /* media query */
 
 @media screen and (max-width:767px) {

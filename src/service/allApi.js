@@ -61,3 +61,8 @@ export const deleteUserAPI = async(id, reqHeader)=>{
     return await commonAPI(`DELETE`, `${serverURL}/delete-user/${id}`,{}, reqHeader)
 }
 
+//api for get all recipes details
+export const getAllRecipesDetailAPI = async(reqHeader)=>{
+    return await commonAPI(`GET`, `${serverURL}/admin-all-recipes`,"", reqHeader)
+}
+

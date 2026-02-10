@@ -1,12 +1,41 @@
-import React from 'react'
-
+import React, { useEffect, useState } from 'react'
 import Footer from '../components/Footer'
 import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { getAllRecipesDetailAPI } from '../service/allApi';
+import { serverURL } from '../service/serverUrl';
 
 
 function AdminRecipes() {
+    const [token, setToken] = useState("")
+    const [allRecipes, setAllRecipes] = useState([])
+    console.log(allRecipes);
+
+
+    const getAllRecipes = async () => {
+        if (sessionStorage.getItem("token")) {
+            const token = sessionStorage.getItem("token")
+
+            const reqHeader = {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+
+            const result = await getAllRecipesDetailAPI(reqHeader)
+            setAllRecipes(result.data)
+        }
+    }
+
+    useEffect(() => {
+        getAllRecipes()
+        if (sessionStorage.getItem("token")) {
+            setToken(sessionStorage.getItem("token"))
+        }
+    }, [])
+
     return (
         <>
             <div className='d-flex justify-content-between align-items-center px-3 bg-dark' style={{ minHeight: "10vh" }}>
@@ -18,43 +47,67 @@ function AdminRecipes() {
             </div>
 
 
+            <div className='adminrecipepage container-fluid'>
+                <div className="row pt-lg-4 pt-3 ">
+                    <div className="col-md-2"></div>
+                    <div className="col-md-8 d-flex flex-column justify-content-center align-items-center pt-lg-4 pt-3">
+                        <div className=' bg-light text-dark d-flex justify-content-center align-items-center px-5 py-5' style={{ borderRadius: "50%", fontWeight: "bold", fontSize: "20px" }}>
+                            RECI
+                        </div>
+                        <div className='mt-4'>
+                            <h1 className='mainhead'>All Recipes</h1>
+                        </div>
 
-            {/* recipes */}
-            <div className='container-fluid'>
+
+                    </div>
+                    <div className="col-md-2"></div>
+                </div>
+
+            </div>
+
+
+            {/* recipes card section */}
+            {allRecipes?.length > 0 ? <div className='container-fluid mt-lg-5 mt-3'>
                 <div className="row">
-                    <div className="col-md-1"></div>
-                    <div className="col-md-5">
-                        <div>
-                            <Card style={{ width: '100%' }}>
-                                <Card.Img variant="top" src="holder.js/100px180" />
-                                <Card.Body>
-                                    <Card.Title>Card Title</Card.Title>
-                                    <Card.Text>
-                                        Some quick example text to build on the card title and make up the
-                                        bulk of the card's content.
-                                    </Card.Text>
-                                    <Button variant="primary">Go somewhere</Button>
-                                </Card.Body>
-                            </Card>
+                    {allRecipes?.map((item) => (<div className="col-md-6 mt-4">
+                        <div className="row">
+                            <div className="col-md-2"></div>
+                            <div className="col-md-8">
+                                <Card className='border-0' style={{ width: '100%' }}>
+                                    <Card.Img variant="top" src={`${serverURL}/upload/${item?.recipeImage}`} />
+                                    <Card.Body>
+                                        <h1 className='' style={{ fontWeight: "bold" }}>{item?.recipename}</h1>
+                                        <h5 className='mt-lg-2 mt-1 '>
+                                            <FontAwesomeIcon icon={faClock} className='me-2' />{item?.time}
+                                        </h5>
+                                        <p className='mt-lg-2 mt-1'><span style={{ fontWeight: "bold" }}>Incredients:</span>{item?.incredients
+                                        }</p>
+                                        <h5 className='mb-2'>{item?.category
+
+                                        }</h5>
+                                        <Button variant="danger clas
+                                        rounded " style={{ fontWeight: "bold" }}><FontAwesomeIcon icon={faTrash} style={{ color: "white", marginRight: "7px" }} />Remove</Button>
+                                    </Card.Body>
+                                </Card>
+                            </div>
+                            <div className="col-md-2"></div>
+                        </div>
+                    </div>))}
+                </div>
+            </div> :
+
+                <div style={{ minHeight: "69vh" }}>
+                    <div className='container-fluid ' style={{ height: "65vh" }}>
+                        <div className="row">
+                            <div className="col-3"></div>
+                            <div className="col-6  text-info mt-5 pt-5  d-flex flex-column justify-content-center align-items-center">
+                                <img src="https://www.creativefabrica.com/wp-content/uploads/2023/10/26/Empty-meal-tray-Cartoon-kicthen-contain-Graphics-82559752-1.png" alt="" style={{ height: "200px" }} />
+                                <h1 className='text-center ' style={{ fontWeight: "bold" }}>Users not Added any recipes yet!!!</h1>
+                            </div>
+                            <div className="col-3"></div>
                         </div>
                     </div>
-                    <div className="col-md-1"></div>
-                    <div className="col-md-4"></div>
-                    <div className="col-md-1"></div>
-                </div>
-            </div>
-            <div style={{ minHeight: "69vh" }}>
-                <div className='container-fluid ' style={{ height: "65vh" }}>
-                    <div className="row">
-                        <div className="col-3"></div>
-                        <div className="col-6  text-info mt-5 pt-5  d-flex flex-column justify-content-center align-items-center">
-                            <img src="https://www.creativefabrica.com/wp-content/uploads/2023/10/26/Empty-meal-tray-Cartoon-kicthen-contain-Graphics-82559752-1.png" alt="" style={{ height: "200px" }} />
-                            <h1 className='text-center ' style={{ fontWeight: "bold" }}>Users not Added any recipes yet!!!</h1>
-                        </div>
-                        <div className="col-3"></div>
-                    </div>
-                </div>
-            </div>
+                </div>}
             <Footer />
 
         </>
