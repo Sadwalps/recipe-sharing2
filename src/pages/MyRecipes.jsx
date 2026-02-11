@@ -34,7 +34,7 @@ function MyRecipes() {
     return (
         <>
             <Header />
-            {userRecipes ?.length>0? <div className='container-fluid'>
+            {userRecipes ?.length>0? <div className='container-fluid' style={{minHeight:"70vh"}}>
                 {userRecipes?.map((item) => (<div className="row">
                     <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
                     <div className="col-lg-8 col-md-8 col-sm-8 col-12">
