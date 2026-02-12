@@ -1,4 +1,4 @@
-import { faBowlFood, faPowerOff, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faBowlFood, faPowerOff, faTrash, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
@@ -60,10 +60,15 @@ function AdminDashboard() {
                 <img className='' src="https://cdn-icons-png.freepik.com/512/10840/10840480.png" alt="app img" style={{ height: "45", width: "45px" }} />
                 <h4 className='text-light ' style={{ fontWeight: "bold" }}>Reci</h4>
               </div>
-              <div className='d-flex align-items-center justify-content-center' style={{ minHeight: "35vh" }}>
+              <div className='d-flex flex-column gap-3 align-items-center justify-content-center mt-5' style={{ minHeight: "35vh" }}>
                 <Link to={'/adminallrecipes'}>  <button className='btn btn-info rounded ' style={{ height: "7rem", width: "7rem", fontSize: "3rem" }}>
                   <FontAwesomeIcon icon={faBowlFood} className='' />
                 </button></Link>
+
+                 <button className='btn btn-primary rounded ' style={{ height: "7rem", width: "7rem", fontSize: "3rem", position:"relative" }}>
+                  <FontAwesomeIcon icon={faUser} />
+                  {allUsersDetails.map((item, index)=>(<div className='rounded  bg-light fs-5 px-2 text-primary' style={{position:"absolute", top:"1px", right:"1px", fontWeight:"bold"}} >{index+1}</div>))}
+                 </button>
               </div>
             </div>
 
