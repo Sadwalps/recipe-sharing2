@@ -23,7 +23,7 @@ function App() {
         <Route path='/adminSignup' element={<AdminAuthentication adminSignup={true} />} />
         <Route path='/adminLogin' element={<AdminAuthentication />} />
         <Route path='/login' element={<Authentication />} />
-        <Route path='/myrecipes' element={loginResponse ? <MyRecipes /> : <PageNotFound />} />
+        <Route path='/myrecipes' element={ <MyRecipes /> } />
         <Route path='/allrecipes' element={loginResponse ? <AllRecipes /> : <PageNotFound />} />
         <Route path='/admin' element={ <AdminDashboard />} />
         <Route path='/adminallrecipes' element={<AdminRecipes/>}/>
