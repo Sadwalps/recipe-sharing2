@@ -11,6 +11,7 @@ import { loginResponseContext } from './context/ContextShare'
 import { useContext } from 'react'
 import AdminAuthentication from './pages/AdminAuthentication'
 import AdminRecipes from './pages/AdminRecipes'
+import Chats from './pages/Chats'
 
 function App() {
   const { loginResponse } = useContext(loginResponseContext)
@@ -27,8 +28,7 @@ function App() {
         <Route path='/allrecipes' element={loginResponse ? <AllRecipes /> : <PageNotFound />} />
         <Route path='/admin' element={ <AdminDashboard />} />
         <Route path='/adminallrecipes' element={<AdminRecipes/>}/>
-        
-        
+        <Route path='/chats' element={<Chats/>}/>
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </>

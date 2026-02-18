@@ -4,7 +4,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import RecipeCard from '../components/RecipeCard'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClock } from '@fortawesome/free-solid-svg-icons'
+import { faClock, faMessage } from '@fortawesome/free-solid-svg-icons'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { addRecipeAPI, getHomeRecipeAPI } from '../service/allApi'
@@ -19,6 +19,9 @@ function Home() {
     console.log(preview);
     const [homeRecipes, setHomeRecipes] = useState([])
     console.log(homeRecipes);
+    const [userName, setUsername] = useState("")
+    console.log(userName);
+    
 
 
     const [recipeDetails, setRecipeDetails] = useState({
@@ -133,6 +136,16 @@ function Home() {
         }
     })
 
+    useEffect(()=>{
+        const userData = sessionStorage.getItem("existingUser")
+        if(userData){
+            const usersname = JSON.parse(userData)
+            setUsername(usersname.username)
+        }
+    },[])
+
+
+
     return (
         <>
             {/* Home page before login */}
@@ -158,6 +171,7 @@ function Home() {
                     <Header />
 
                     <div id='home2' >
+                       
                         <div className='container-fluid'>
                             <div className="row pt-lg-5 pt-4 ">
                                 <div className="col-md-2"></div>
@@ -166,6 +180,7 @@ function Home() {
                                         RECI
                                     </div>
                                     <h1 className='mainhead'>Submit recipes</h1>
+                                    <h2 className='text-light' style={{fontWeight:"bold"}}>Welcome {userName}</h2>
                                     <h3 className='text-light ps-lg-1 ps-2' style={{ fontWeight: "bold" }}>Easily share your own recipe on our website </h3>
                                     <button onClick={handleShow} className='btn btn-info px-lg-5 px-4 py-lg-2 py-2  mt-3 fs-lg-4 fs-5' style={{ borderRadius: "25px", fontWeight: "bold" }}>SUBMIT A RECIPE</button>
 

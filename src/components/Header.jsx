@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import { faMessage, faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import { useEffect } from 'react';
 import { loginResponseContext } from '../context/ContextShare';
 function Header() {
@@ -11,7 +11,7 @@ function Header() {
   const [token, setToken] = useState("")
   const navigate = useNavigate()
 
-useEffect(() => {
+  useEffect(() => {
     if (sessionStorage.getItem("token")) {
       setToken(sessionStorage.getItem("token"))
     }
@@ -26,7 +26,7 @@ useEffect(() => {
     navigate('/')
   }
 
-  
+
 
 
   return (
@@ -43,9 +43,13 @@ useEffect(() => {
                 alt="Websitelogo"
               />
             </Link>
-            <div onClick={handleLogout} id='logoutdiv'>
-              <FontAwesomeIcon icon={faPowerOff} />
+            <div className='d-flex gap-3'>
+              <Link to={'/chats'}> <button className='btn btn-lg fs-4 btn-light' style={{height:"60px", width:"60px"}} ><FontAwesomeIcon icon={faMessage} /></button></Link>
+              <div onClick={handleLogout} id='logoutdiv'>
+                <FontAwesomeIcon icon={faPowerOff} />
+              </div>
             </div>
+
           </Container>
         </Navbar>
       </div>
