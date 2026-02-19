@@ -38,6 +38,20 @@
     cursor: pointer;
 }
 
+#chatbtn {
+    background-color: rgb(43, 42, 42);
+    color: rgb(66, 66, 235);
+    width: 60px;
+    height: 60px;
+}
+
+#chatbtn:hover {
+    color: rgb(43, 42, 42);
+    background-color: rgb(66, 66, 235);
+    transition-duration: .2s;
+    cursor: pointer;
+}
+
 
 
 /* Footer */
@@ -146,6 +160,9 @@
     min-height: 30rem;
 }
 
+
+
+
 /* media query */
 
 @media screen and (max-width:767px) {
@@ -181,6 +198,15 @@
         height: 45px;
         width: 45px;
         font-size: large;
+    }
+
+    #logoutdiv {
+        width: 50px;
+        height: 50px;
+    }
+    #chatbtn{
+         width: 50px;
+        height: 50px;
     }
 
 }

@@ -27,8 +27,6 @@ function Header() {
   }
 
 
-
-
   return (
     <>
       <div>
@@ -44,7 +42,7 @@ function Header() {
               />
             </Link>
             <div className='d-flex gap-3'>
-              <Link to={'/chats'}> <button className='btn btn-lg fs-4 btn-light' style={{height:"60px", width:"60px"}} ><FontAwesomeIcon icon={faMessage} /></button></Link>
+              <Link to={'/chats'} > <button className='btn fs-5' id='chatbtn'  ><FontAwesomeIcon icon={faMessage} /></button></Link>
               <div onClick={handleLogout} id='logoutdiv'>
                 <FontAwesomeIcon icon={faPowerOff} />
               </div>
