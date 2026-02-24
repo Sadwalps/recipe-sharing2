@@ -8,11 +8,17 @@ import Modal from 'react-bootstrap/Modal';
 
 function Chats() {
   const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const [token, setToken] = useState("")
   console.log(token);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const [chatDescription, setChatDescription] = useState([])
+  console.log(chatDescription);
+
+const handleCancel =()=>{
+  setChatDescription([])
+}
 
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
@@ -35,12 +41,12 @@ function Chats() {
                 <Modal.Title className='text-primary' style={{ fontWeight: "bold" }}>Add chats</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <textarea name="" id="" className='bg-primary form-control py-1 my-2 text-center rounded' placeholder='****' style={{ fontWeight: "bold" }}>
+                <textarea value={chatDescription} onChange={(e) => setChatDescription(e.target.value)} name="" id="" className='bg-primary form-control py-1 my-2 text-center rounded' placeholder='****' style={{ fontWeight: "bold" }}>
 
                 </textarea>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="danger" onClick={handleClose}>
+                <Button variant="danger" onClick={handleCancel}>
                   Cancel
                 </Button>
                 <Button variant="primary" onClick={handleClose}>

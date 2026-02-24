@@ -1,4 +1,4 @@
-import { faBowlFood, faPowerOff, faTrash, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faBowlFood, faMessage, faPowerOff, faTrash, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
@@ -66,6 +66,13 @@ function AdminDashboard() {
                 <button className='btn btn-primary rounded ' style={{ height: "7rem", width: "7rem", fontSize: "3rem", position: "relative" }}>
                   <FontAwesomeIcon icon={faUser} />
                   {allUsersDetails.map((item, index) => (<div className='rounded  bg-light fs-5 px-2 text-primary' style={{ position: "absolute", top: "1px", right: "1px", fontWeight: "bold" }} >{index + 1}</div>))}
+                </button>
+
+                <button className='btn btn-primary rounded ' style={{ height: "7rem", width: "7rem", fontSize: "3rem", position: "relative" }}>
+                  <FontAwesomeIcon icon={faMessage
+
+                  } />
+                  <div className='rounded  bg-light fs-5 px-2 text-primary' style={{ position: "absolute", top: "1px", right: "1px", fontWeight: "bold" }} >{index + 1}</div>
                 </button>
               </div>}
             </div>
