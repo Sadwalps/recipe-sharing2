@@ -9,20 +9,46 @@ import Modal from 'react-bootstrap/Modal';
 function Chats() {
   const [show, setShow] = useState(false);
   const [token, setToken] = useState("")
+  const [userName, setUsername] = useState("")
+  console.log(userName);
   console.log(token);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    handleCancel()
+    setShow(false);
+  }
   const handleShow = () => setShow(true);
 
-  const [chatDescription, setChatDescription] = useState([])
+  const [chatDescription, setChatDescription] = useState("")
   console.log(chatDescription);
 
-const handleCancel =()=>{
-  setChatDescription([])
+  const handleCancel = () => {
+    setChatDescription("")
+  }
+
+const handleAdd = async()=>{
+  console.log(chatDescription);
+  console.log(userName);
+  
+  
+  
+  if(!chatDescription || !userName){
+    alert(`Fill the form completely`)
+  }else{
+    
+  }
 }
 
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
       setToken(sessionStorage.getItem("token"))
+    }
+  }, [])
+
+  useEffect(() => {
+    const userData = sessionStorage.getItem("existingUser")
+    if (userData) {
+      const usersname = JSON.parse(userData)
+      setUsername(usersname.username)
     }
   }, [])
 
@@ -36,11 +62,16 @@ const handleCancel =()=>{
               <FontAwesomeIcon icon={faPlus} style={{ fontWeight: "bold" }} />
             </button>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} >
               <Modal.Header closeButton>
                 <Modal.Title className='text-primary' style={{ fontWeight: "bold" }}>Add chats</Modal.Title>
               </Modal.Header>
               <Modal.Body>
+                <div className='d-flex  gap-2 justify-content-center align-items-center'>
+                  <h5 className='text-primary ' style={{ fontWeight: "bold" }}>Username:</h5>
+                  <input type="text" value={userName} readOnly className='bg-light text-primary form-control py-1 my-2 text-center rounded w-50' style={{ fontWeight: "bold" }} />
+                </div>
+
                 <textarea value={chatDescription} onChange={(e) => setChatDescription(e.target.value)} name="" id="" className='bg-primary form-control py-1 my-2 text-center rounded' placeholder='****' style={{ fontWeight: "bold" }}>
 
                 </textarea>
@@ -49,7 +80,7 @@ const handleCancel =()=>{
                 <Button variant="danger" onClick={handleCancel}>
                   Cancel
                 </Button>
-                <Button variant="primary" onClick={handleClose}>
+                <Button variant="primary" onClick={handleAdd}>
                   Add
                 </Button>
               </Modal.Footer>

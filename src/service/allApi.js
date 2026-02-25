@@ -57,12 +57,16 @@ export const getAllUsersDetailsAPI = async () => {
 }
 
 //api for delete user
-export const deleteUserAPI = async(id, reqHeader)=>{
-    return await commonAPI(`DELETE`, `${serverURL}/delete-user/${id}`,{}, reqHeader)
+export const deleteUserAPI = async (id, reqHeader) => {
+    return await commonAPI(`DELETE`, `${serverURL}/delete-user/${id}`, {}, reqHeader)
 }
 
 //api for get all recipes details
-export const getAllRecipesDetailAPI = async(reqHeader)=>{
-    return await commonAPI(`GET`, `${serverURL}/admin-all-recipes`,"", reqHeader)
+export const getAllRecipesDetailAPI = async (reqHeader) => {
+    return await commonAPI(`GET`, `${serverURL}/admin-all-recipes`, "", reqHeader)
 }
 
+//api for add chats
+export const addChatAPI = async (reqBody, reqHeader) => {
+    return await commonAPI(`POST`, `${serverURL}/add-chats`, reqBody, reqHeader)
+}

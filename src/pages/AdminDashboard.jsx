@@ -63,16 +63,14 @@ function AdminDashboard() {
                   <FontAwesomeIcon icon={faBowlFood} className='' />
                 </button></Link>
 
-                <button className='btn btn-primary rounded ' style={{ height: "7rem", width: "7rem", fontSize: "3rem", position: "relative" }}>
+                <button className='btn btn-success rounded ' style={{ height: "7rem", width: "7rem", fontSize: "3rem", position: "relative" }}>
                   <FontAwesomeIcon icon={faUser} />
-                  {allUsersDetails.map((item, index) => (<div className='rounded  bg-light fs-5 px-2 text-primary' style={{ position: "absolute", top: "1px", right: "1px", fontWeight: "bold" }} >{index + 1}</div>))}
+                  {allUsersDetails.map((item, index) => (<div className='rounded  bg-light fs-5 px-2 text-success' style={{ position: "absolute", top: "1px", right: "1px", fontWeight: "bold" }} >{index + 1}</div>))}
                 </button>
 
                 <button className='btn btn-primary rounded ' style={{ height: "7rem", width: "7rem", fontSize: "3rem", position: "relative" }}>
-                  <FontAwesomeIcon icon={faMessage
-
-                  } />
-                  <div className='rounded  bg-light fs-5 px-2 text-primary' style={{ position: "absolute", top: "1px", right: "1px", fontWeight: "bold" }} >{index + 1}</div>
+                  <FontAwesomeIcon icon={faMessage} />
+                  <div className='rounded  bg-light fs-5 px-2 text-primary' style={{ position: "absolute", top: "1px", right: "1px", fontWeight: "bold" }} ></div>
                 </button>
               </div>}
             </div>
@@ -90,10 +88,11 @@ function AdminDashboard() {
                     <div className="col-md-2"></div>
                     <div className="col-md-8">
                       <Link to={'/adminallrecipes'}><button className='btn btn-lg btn-info rounded py-3 w-100 ' style={{ fontWeight: "bold" }}><FontAwesomeIcon icon={faBowlFood} className='me-3' />View All Recipes</button></Link>
+                      <Link to={'/adminallrecipes'} ><button className='btn btn-lg btn-success rounded py-3 w-100 mt-2' style={{ fontWeight: "bold" }}><FontAwesomeIcon icon={faUser} className='me-3' />Uesrs</button></Link>
+                      <Link to={'/adminallrecipes'}><button className='btn btn-lg btn-primary rounded py-3 w-100 mt-2' style={{ fontWeight: "bold" }}><FontAwesomeIcon icon={faMessage} className='me-3' />View All Chats</button></Link>
                     </div>
                     <div className="col-md-2"></div>
                   </div>
-
                 </div>
 
                 {/* table section */}
