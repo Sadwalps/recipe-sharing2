@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { addChatAPI } from '../service/allApi'
 
 function Chats() {
   const [show, setShow] = useState(false);
@@ -25,18 +26,33 @@ function Chats() {
     setChatDescription("")
   }
 
-const handleAdd = async()=>{
-  console.log(chatDescription);
-  console.log(userName);
-  
-  
-  
-  if(!chatDescription || !userName){
-    alert(`Fill the form completely`)
-  }else{
-    
+  const handleAdd = async () => {
+    console.log(chatDescription);
+    console.log(userName);
+    if (!chatDescription || !userName) {
+      alert(`Fill the form completely`)
+    } else {
+      const reqBody = new FormData()
+      reqBody.append("username", userName)
+      reqBody.append("chatDescription", chatDescription)
+      console.log(reqBody);
+      
+
+      if (token) {
+        const reqHeader = {
+          "Content-Type": "multipart/form-data",
+          "Authorization": `Bearer ${token}`
+        }
+        const result = await addChatAPI(reqBody, reqHeader)
+        console.log(result);
+        if (result.status == 200) {
+          alert(`Chats added successfully`)
+        } else {
+          alert(`Something went wrong`)
+        }
+      }
+    }
   }
-}
 
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
