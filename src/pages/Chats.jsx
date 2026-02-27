@@ -10,8 +10,8 @@ import { addChatAPI } from '../service/allApi'
 function Chats() {
   const [show, setShow] = useState(false);
   const [token, setToken] = useState("")
-  const [userName, setUsername] = useState("")
-  console.log(userName);
+  const [username, setUsername] = useState("")
+  console.log(username);
   console.log(token);
   const handleClose = () => {
     handleCancel()
@@ -19,7 +19,10 @@ function Chats() {
   }
   const handleShow = () => setShow(true);
 
-  const [chatDescription, setChatDescription] = useState("")
+  const [chatDescription, setChatDescription] = useState({
+    username:"",
+    chat:""
+  })
   console.log(chatDescription);
 
   const handleCancel = () => {
@@ -27,26 +30,29 @@ function Chats() {
   }
 
   const handleAdd = async () => {
-    console.log(chatDescription);
-    console.log(userName);
-    if (!chatDescription || !userName) {
+    const {username, chat} = chatDescription
+    console.log(username, chat);
+
+    
+   
+    if (!username || !chat) {
       alert(`Fill the form completely`)
     } else {
       const reqBody = new FormData()
-      reqBody.append("username", userName)
-      reqBody.append("chatDescription", chatDescription)
+      reqBody.append("username", username)
+      reqBody.append("chat", chat)
       console.log(reqBody);
-      
-
       if (token) {
         const reqHeader = {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`
         }
         const result = await addChatAPI(reqBody, reqHeader)
         console.log(result);
         if (result.status == 200) {
           alert(`Chats added successfully`)
+        } else if (result.status == 406) {
+          alert(result.response.data)
         } else {
           alert(`Something went wrong`)
         }
@@ -85,10 +91,10 @@ function Chats() {
               <Modal.Body>
                 <div className='d-flex  gap-2 justify-content-center align-items-center'>
                   <h5 className='text-primary ' style={{ fontWeight: "bold" }}>Username:</h5>
-                  <input type="text" value={userName} readOnly className='bg-light text-primary form-control py-1 my-2 text-center rounded w-50' style={{ fontWeight: "bold" }} />
+                  <input type="text" value={chatDescription.username} onChange={(e)=>setChatDescription({...chatDescription,username:e.target.value})} className='bg-light text-primary form-control py-1 my-2 text-center rounded w-50' style={{ fontWeight: "bold" }} />
                 </div>
 
-                <textarea value={chatDescription} onChange={(e) => setChatDescription(e.target.value)} name="" id="" className='bg-primary form-control py-1 my-2 text-center rounded' placeholder='****' style={{ fontWeight: "bold" }}>
+                <textarea value={chatDescription.chat} onChange={(e) => setChatDescription({...chatDescription,chat:e.target.value})} name="" id="" className='bg-primary form-control py-1 my-2 text-center rounded' placeholder='****' style={{ fontWeight: "bold" }}>
 
                 </textarea>
               </Modal.Body>
