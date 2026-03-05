@@ -5,14 +5,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { addChatAPI } from '../service/allApi'
+import { addChatAPI, getUserChatAPI } from '../service/allApi'
 
 function Chats() {
   const [show, setShow] = useState(false);
   const [token, setToken] = useState("")
+  console.log(token);
   const [username, setUsername] = useState("")
   console.log(username);
-  console.log(token);
+
+  const [userChats, setUserChats] = useState([])
+  console.log(userChats);
+
+
   const handleClose = () => {
     handleCancel()
     setShow(false);
@@ -20,8 +25,8 @@ function Chats() {
   const handleShow = () => setShow(true);
 
   const [chatDescription, setChatDescription] = useState({
-    username:"",
-    chat:""
+
+    chat: ""
   })
   console.log(chatDescription);
 
@@ -30,11 +35,10 @@ function Chats() {
   }
 
   const handleAdd = async () => {
-    const {username, chat} = chatDescription
-    console.log(username, chat);
+    const { chat } = chatDescription
+    console.log(chat);
+    console.log(username);
 
-    
-   
     if (!username || !chat) {
       alert(`Fill the form completely`)
     } else {
@@ -51,12 +55,30 @@ function Chats() {
         console.log(result);
         if (result.status == 200) {
           alert(`Chats added successfully`)
+          setTimeout(() => {
+            handleClose()
+          }, 1000);
         } else if (result.status == 406) {
           alert(result.response.data)
         } else {
           alert(`Something went wrong`)
         }
       }
+    }
+  }
+
+  const getUserChats = async () => {
+    if (sessionStorage.getItem("token")) {
+      const token = sessionStorage.getItem("token")
+
+      const reqHeader = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+      const result = await getUserChatAPI(reqHeader)
+      console.log(result);
+      setUserChats(result)
+
     }
   }
 
@@ -72,6 +94,10 @@ function Chats() {
       const usersname = JSON.parse(userData)
       setUsername(usersname.username)
     }
+  }, [])
+
+  useEffect(() => {
+    getUserChats()
   }, [])
 
   return (
@@ -91,10 +117,10 @@ function Chats() {
               <Modal.Body>
                 <div className='d-flex  gap-2 justify-content-center align-items-center'>
                   <h5 className='text-primary ' style={{ fontWeight: "bold" }}>Username:</h5>
-                  <input type="text" value={chatDescription.username} onChange={(e)=>setChatDescription({...chatDescription,username:e.target.value})} className='bg-light text-primary form-control py-1 my-2 text-center rounded w-50' style={{ fontWeight: "bold" }} />
+                  <input type="text" value={username} readOnly className='bg-light text-primary form-control py-1 my-2 text-center rounded w-50' style={{ fontWeight: "bold" }} />
                 </div>
 
-                <textarea value={chatDescription.chat} onChange={(e) => setChatDescription({...chatDescription,chat:e.target.value})} name="" id="" className='bg-primary form-control py-1 my-2 text-center rounded' placeholder='****' style={{ fontWeight: "bold" }}>
+                <textarea value={chatDescription.chat} onChange={(e) => setChatDescription({ ...chatDescription, chat: e.target.value })} name="" id="" className='bg-primary form-control py-1 my-2 text-center rounded' placeholder='****' style={{ fontWeight: "bold" }}>
 
                 </textarea>
               </Modal.Body>

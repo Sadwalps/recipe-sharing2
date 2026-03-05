@@ -70,3 +70,8 @@ export const getAllRecipesDetailAPI = async (reqHeader) => {
 export const addChatAPI = async (reqBody, reqHeader) => {
     return await commonAPI(`POST`, `${serverURL}/add-chats`, reqBody, reqHeader)
 }
+
+//api for get user chats
+export const getUserChatAPI = async (reqHeader) => {
+    return await commonAPI(`GET`, `${serverURL}/user-chats`, "", reqHeader)
+}
