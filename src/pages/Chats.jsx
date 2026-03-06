@@ -69,15 +69,14 @@ function Chats() {
 
   const getUserChats = async () => {
     if (sessionStorage.getItem("token")) {
-      const token = sessionStorage.getItem("token")
-
+     const token = sessionStorage.getItem("token")
       const reqHeader = {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
       }
       const result = await getUserChatAPI(reqHeader)
       console.log(result);
-      setUserChats(result)
+      setUserChats(result.data)
 
     }
   }
@@ -105,7 +104,7 @@ function Chats() {
       <Header />
       <div style={{ minHeight: "67vh" }}>
         {token ? <div>
-          <div className='container-fluid text-center'>
+         {userChats? <div className='container-fluid text-center'>
             <button onClick={handleShow} className='btn text-light btn-lg rounded-circle fs-3 mt-3 chatdivandbtn'>
               <FontAwesomeIcon icon={faPlus} style={{ fontWeight: "bold" }} />
             </button>
@@ -152,7 +151,7 @@ function Chats() {
               </div>
               <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
             </div>
-          </div>
+          </div>:
 
           <div className='container-fluid ' style={{ height: "65vh" }}>
             <div className="row">
@@ -163,7 +162,7 @@ function Chats() {
               </div>
               <div className="col-3"></div>
             </div>
-          </div>
+          </div>}
         </div> :
 
 
