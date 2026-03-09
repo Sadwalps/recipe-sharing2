@@ -6,6 +6,7 @@ import { faPenToSquare, faPlus, faTrash } from '@fortawesome/free-solid-svg-icon
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { addChatAPI, getUserChatAPI } from '../service/allApi'
+import { useNavigate } from 'react-router-dom'
 
 function Chats() {
   const [show, setShow] = useState(false);
@@ -16,6 +17,7 @@ function Chats() {
 
   const [userChats, setUserChats] = useState([])
   console.log(userChats);
+  
 
 
   const handleClose = () => {
@@ -57,7 +59,9 @@ function Chats() {
           alert(`Chats added successfully`)
           setTimeout(() => {
             handleClose()
+            
           }, 1000);
+           
         } else if (result.status == 406) {
           alert(result.response.data)
         } else {
@@ -99,6 +103,7 @@ function Chats() {
     getUserChats()
   }, [])
 
+ 
   return (
     <>
       <Header />

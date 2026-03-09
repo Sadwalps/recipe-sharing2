@@ -160,6 +160,13 @@
     min-height: 30rem;
 }
 
+.adminchatpage{
+     background-image: url(https://wallpaperaccess.com/full/1462457.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 30rem;
+}
+
 
 .chatdivandbtn {
     background-image: linear-gradient(to right bottom, rgb(104, 104, 232), rgb(75, 173, 205));

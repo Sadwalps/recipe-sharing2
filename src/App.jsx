@@ -12,6 +12,7 @@ import { useContext } from 'react'
 import AdminAuthentication from './pages/AdminAuthentication'
 import AdminRecipes from './pages/AdminRecipes'
 import Chats from './pages/Chats'
+import AdminChats from './pages/AdminChats'
 
 function App() {
   const { loginResponse } = useContext(loginResponseContext)
@@ -29,6 +30,7 @@ function App() {
         <Route path='/admin' element={ <AdminDashboard />} />
         <Route path='/adminallrecipes' element={<AdminRecipes/>}/>
         <Route path='/chats' element={<Chats/>}/>
+        <Route path='/adminchats' element={<AdminChats/>}/>
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </>
