@@ -5,7 +5,7 @@ import Edit from './Edit'
 import { serverURL } from '../service/serverUrl'
 import { deleteUserRecipeAPI } from '../service/allApi'
 
-function RecipeCard({ recipes, setDeleteRecipeStatus ,setEditStatus}) {
+function RecipeCard({ recipes, setDeleteRecipeStatus, setEditStatus }) {
 
     const handleDelete = async (id) => {
         if (sessionStorage.getItem("token")) {
@@ -19,13 +19,11 @@ function RecipeCard({ recipes, setDeleteRecipeStatus ,setEditStatus}) {
             if (result.status == 200) {
                 alert(result.data)
                 setDeleteRecipeStatus(result)
-            }else{
+            } else {
                 alert(`Something went wrong`)
             }
         }
     }
-
-
 
     return (
         <>

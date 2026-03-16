@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPenToSquare, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
+import {  faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { addChatAPI, getUserChatAPI } from '../service/allApi'
 import { useNavigate } from 'react-router-dom'
+import EditChat from '../components/EditChat'
 
 function Chats() {
   const [show, setShow] = useState(false);
@@ -143,9 +144,8 @@ function Chats() {
                 <div className='w-100 mt-2 rounded   text-center text-light p-1 chatdivandbtn' >
                   <h4 className='pt-3' style={{ fontWeight: "bold" }}>jfhsdjkhkdjkhdsfkhgjkdhf</h4>
                   <div className='d-flex justify-content-between'>
-                    <button className='btn btn-light rounded text-primary'>
-                      <FontAwesomeIcon icon={faPenToSquare} className=' fs-4' />
-                    </button>
+                   
+                   
                     <button className='btn btn-light text-danger rounded'>
                       <FontAwesomeIcon icon={faTrash} className='fs-4' />
                     </button>

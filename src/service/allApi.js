@@ -75,3 +75,8 @@ export const addChatAPI = async (reqBody, reqHeader) => {
 export const getUserChatAPI = async (reqHeader) => {
     return await commonAPI(`GET`, `${serverURL}/user-chats`, "", reqHeader)
 }
+
+//api for delete user chats
+export const deleteUserChatAPI = async (id, reqHeader) => {
+    return await commonAPI(`DELETE`, `${serverURL}/delete-chat/${id}`, {}, reqHeader)
+}

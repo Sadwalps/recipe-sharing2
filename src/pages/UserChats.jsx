@@ -3,7 +3,8 @@ import AddChats from './AddChats'
 import Header from '../components/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { getUserChatAPI } from '../service/allApi'
+import { deleteUserChatAPI, getUserChatAPI } from '../service/allApi'
+import EditChat from '../components/EditChat'
 
 function UserChats() {
     const [token, setToken] = useState("")
@@ -13,6 +14,8 @@ function UserChats() {
     console.log(userChats);
 
     const [addChatStatus, setAddChatStatus] = useState([])
+
+    const [deleteChatStatus, setDeleteChatStatus] = useState({})
 
     const getUserChats = async () => {
         if (sessionStorage.getItem("token")) {
@@ -28,6 +31,24 @@ function UserChats() {
         }
     }
 
+    const handleDelete = async (id) => {
+        if (token) {
+            const token = sessionStorage.getItem("token")
+            const reqHeader = {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+            const result = await deleteUserChatAPI(id, reqHeader)
+            console.log(result);
+            if (result.status == 200) {
+                alert(result.data)
+                setDeleteChatStatus(result)
+            } else {
+                alert(`Something went wrong`)
+            }
+        }
+    }
+
     useEffect(() => {
         if (sessionStorage.getItem("token")) {
             setToken(sessionStorage.getItem("token"))
@@ -36,7 +57,8 @@ function UserChats() {
 
     useEffect(() => {
         getUserChats()
-    }, [addChatStatus])
+    }, [addChatStatus, deleteChatStatus])
+
     return (
         <>
             <Header />
@@ -54,10 +76,8 @@ function UserChats() {
                                 <div className='w-100 mt-2 rounded   text-center text-light p-1 chatdivandbtn' >
                                     <h4 className='pt-3' style={{ fontWeight: "bold" }}>{item?.chat}</h4>
                                     <div className='d-flex justify-content-between'>
-                                        <button className='btn btn-light rounded text-primary'>
-                                            <FontAwesomeIcon icon={faPenToSquare} className=' fs-4' />
-                                        </button>
-                                        <button className='btn btn-light text-danger rounded'>
+                                        <EditChat chats={item}/>
+                                        <button onClick={() => handleDelete(item?._id)} className='btn btn-light text-danger rounded'>
                                             <FontAwesomeIcon icon={faTrash} className='fs-4' />
                                         </button>
                                     </div>
