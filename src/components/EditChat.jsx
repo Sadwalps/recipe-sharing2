@@ -4,15 +4,15 @@ import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-function EditChat({chats}) {
+function EditChat({ chats }) {
     const [show, setShow] = useState(false);
     const [chatDetails, setChatDetails] = useState({
-        chat : chats?.chat
+        chat: chats?.chat
     })
     console.log(chatDetails);
-    
-     const [username, setUsername] = useState("")
-        console.log(username);
+
+    const [username, setUsername] = useState("")
+    console.log(username);
     const handleShow = () => setShow(true);
 
     const handleClose = () => {
@@ -20,13 +20,19 @@ function EditChat({chats}) {
         setShow(false);
     }
 
+    const handleCancel = () => {
+        setChatDetails({
+           chat: chats?.chat
+        })
+    }
+
     useEffect(() => {
-            const userData = sessionStorage.getItem("existingUser")
-            if (userData) {
-                const usersname = JSON.parse(userData)
-                setUsername(usersname.username)
-            }
-        }, [])
+        const userData = sessionStorage.getItem("existingUser")
+        if (userData) {
+            const usersname = JSON.parse(userData)
+            setUsername(usersname.username)
+        }
+    }, [])
 
 
     return (
@@ -45,12 +51,12 @@ function EditChat({chats}) {
                         <input value={username} readOnly type="text" className='bg-light text-primary form-control py-1 my-2 text-center rounded w-50' style={{ fontWeight: "bold" }} />
                     </div>
 
-                    <textarea name="" id="" className='bg-primary form-control py-1 my-2 text-center rounded' placeholder='****' style={{ fontWeight: "bold" }}>
+                    <textarea value={chatDetails.chat} onChange={(e) => setChatDetails({ ...chatDetails, chat: e.target.value })} name="" id="" className='bg-primary form-control py-1 my-2 text-center rounded' placeholder='****' style={{ fontWeight: "bold" }}>
 
                     </textarea>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="danger" >
+                    <Button onClick={handleCancel} variant="danger" >
                         Cancel
                     </Button>
                     <Button variant="primary" >

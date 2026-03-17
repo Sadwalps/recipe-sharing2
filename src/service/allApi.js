@@ -80,3 +80,8 @@ export const getUserChatAPI = async (reqHeader) => {
 export const deleteUserChatAPI = async (id, reqHeader) => {
     return await commonAPI(`DELETE`, `${serverURL}/delete-chat/${id}`, {}, reqHeader)
 }
+
+//api for update user recipes
+export const UpdateUserChatAPI = async (id, reqBody, reqHeader) => {
+    return await commonAPI(`PUT`, `${serverURL}/update-userchat/${id}`, reqBody, reqHeader)
+}
