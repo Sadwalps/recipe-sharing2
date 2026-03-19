@@ -29,10 +29,10 @@ function AdminChats() {
 
             </div>
 
-{/* chats section */}
-<div>
+            {/* chats section */}
+            <div>
 
-</div>
+            </div>
 
         </>
     )

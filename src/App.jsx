@@ -11,7 +11,6 @@ import { loginResponseContext } from './context/ContextShare'
 import { useContext } from 'react'
 import AdminAuthentication from './pages/AdminAuthentication'
 import AdminRecipes from './pages/AdminRecipes'
-import Chats from './pages/Chats'
 import AdminChats from './pages/AdminChats'
 import UserChats from './pages/UserChats'
 

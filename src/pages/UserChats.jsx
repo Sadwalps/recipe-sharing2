@@ -17,6 +17,8 @@ function UserChats() {
 
     const [deleteChatStatus, setDeleteChatStatus] = useState({})
 
+    const [editChatStatus, setEditChatStatus] = useState({})
+
     const getUserChats = async () => {
         if (sessionStorage.getItem("token")) {
             const token = sessionStorage.getItem("token")
@@ -57,7 +59,7 @@ function UserChats() {
 
     useEffect(() => {
         getUserChats()
-    }, [addChatStatus, deleteChatStatus])
+    }, [addChatStatus, deleteChatStatus,editChatStatus])
 
     return (
         <>
@@ -76,7 +78,7 @@ function UserChats() {
                                 <div className='w-100 mt-2 rounded   text-center text-light p-1 chatdivandbtn' >
                                     <h4 className='pt-3' style={{ fontWeight: "bold" }}>{item?.chat}</h4>
                                     <div className='d-flex justify-content-between'>
-                                        <EditChat chats={item}/>
+                                        <EditChat  chats={item}  setEditChatStatus={setEditChatStatus}/>
                                         <button onClick={() => handleDelete(item?._id)} className='btn btn-light text-danger rounded'>
                                             <FontAwesomeIcon icon={faTrash} className='fs-4' />
                                         </button>
