@@ -2,13 +2,14 @@ import { faBowlFood, faMessage, faPowerOff, faTrash, faUser } from '@fortawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
-import { deleteUserAPI, getAllUsersDetailsAPI } from '../service/allApi';
+import { deleteUserAPI, getAllChatsDetailAPI, getAllUsersDetailsAPI } from '../service/allApi';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 
 function AdminDashboard() {
 
   const [allUsersDetails, setAllUsersDetails] = useState([])
+  const [allChatDetails, setAllChatDetails] = useState([]) 
   const [deleteUserStatus, setDeleteUserStatus] = useState("")
   const [token, setToken] = useState("")
 
@@ -18,6 +19,14 @@ function AdminDashboard() {
     setAllUsersDetails(result.data)
   }
   console.log(allUsersDetails);
+
+  const getallchatsdetails  = async()=>{
+    const result = await getAllChatsDetailAPI()
+    console.log(result);
+    setAllChatDetails(result.data)
+  }
+  console.log(allChatDetails);
+  
 
   const handleDelete = async (id) => {
     if (sessionStorage.getItem("token")) {
@@ -38,6 +47,8 @@ function AdminDashboard() {
   }
 
 
+
+
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
       setToken(sessionStorage.getItem("token"))
@@ -47,6 +58,7 @@ function AdminDashboard() {
 
   useEffect(() => {
     getallusersdetails()
+    getallchatsdetails()
   }, [deleteUserStatus])
   return (
     <>
@@ -89,7 +101,7 @@ function AdminDashboard() {
                     <div className="col-md-2"></div>
                     <div className="col-md-8">
                       <Link to={'/adminallrecipes'}><button className='btn btn-lg btn-info rounded py-3 w-100 ' style={{ fontWeight: "bold" }}><FontAwesomeIcon icon={faBowlFood} className='me-3' />View All Recipes</button></Link>
-                      <Link to={'/adminallrecipes'} ><button className='btn btn-lg btn-success rounded py-3 w-100 mt-2' style={{ fontWeight: "bold" }}><FontAwesomeIcon icon={faUser} className='me-3' />Uesrs</button></Link>
+                      <Link to={'/adminallrecipes'} ><button className='btn btn-lg btn-success rounded py-3 w-100 mt-2' style={{ fontWeight: "bold" }}><FontAwesomeIcon icon={faUser} className='me-3' />Users</button></Link>
                       <Link to={'/adminchats'}><button className='btn btn-lg btn-primary rounded py-3 w-100 mt-2' style={{ fontWeight: "bold" }}><FontAwesomeIcon icon={faMessage} className='me-3' />View All Chats</button></Link>
                     </div>
                     <div className="col-md-2"></div>
