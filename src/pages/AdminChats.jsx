@@ -1,10 +1,29 @@
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import EditChat from '../components/EditChat'
+import { getAllChatsDetailAPI } from '../service/allApi'
 
 function AdminChats() {
+    const [allChatDetails, setAllChatDetails] = useState([])
+    const [token, setToken] = useState("")
+
+    const getallchatsdetails = async () => {
+        const result = await getAllChatsDetailAPI()
+        setAllChatDetails(result.data)
+    }
+    console.log(allChatDetails);
+
+    useEffect(() => {
+        getallchatsdetails()
+    }, [])
+
+    useEffect(() => {
+        if (sessionStorage.getItem("token")) {
+            setToken(sessionStorage.getItem("token"))
+        }
+    })
     return (
         <>
 
@@ -33,34 +52,37 @@ function AdminChats() {
             </div>
 
             {/* chats section */}
-            <div className='container-fluid'>
-                <div className="row mt-3">
-                    <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
-                    <div className="col-lg-8 col-md-8 col-sm-8 col-12">
-                        <div className='w-100 mt-2 rounded   text-center text-light p-1 chatdivandbtn' >
-                            <h4 className='pt-3' style={{ fontWeight: "bold" }}>ghfdhgfgh</h4>
-                            <div className='d-flex justify-content-between'>
-                                <EditChat />
-                                <button className='btn btn-light text-danger rounded'>
-                                    <FontAwesomeIcon icon={faTrash} className='fs-4' />
-                                </button>
+          {  token?<div className='mb-4'>
+                {allChatDetails ? <div className='container-fluid mt-3'>
+                    {allChatDetails?.map((item) => (<div className="row mt-2">
+                        <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
+                        <div className="col-lg-8 col-md-8 col-sm-8 col-12">
+                            <div className='w-100 mt-2 rounded   text-center text-light p-1 chatdivandbtn' >
+                                <h5 className='pt-3' style={{ fontWeight: "bold" }}>Username : {item?.username}</h5>
+                                <h4 className='pt-1' style={{ fontWeight: "bold" }}>{item?.chat}</h4>
+                                <div className='d-flex justify-content-between'>
+                                    <EditChat />
+                                    <button className='btn btn-light text-danger rounded'>
+                                        <FontAwesomeIcon icon={faTrash} className='fs-4' />
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
-                </div>
-            </div>
+                        <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
+                    </div>))}
+                </div> :
 
-            <div className='container-fluid ' style={{ height: "65vh" }}>
-                <div className="row">
-                    <div className="col-3"></div>
-                    <div className="col-6  text-info mt-5 pt-5  d-flex flex-column justify-content-center align-items-center">
-                        <img src="https://www.creativefabrica.com/wp-content/uploads/2023/10/26/Empty-meal-tray-Cartoon-kicthen-contain-Graphics-82559752-1.png" alt="" style={{ height: "200px" }} />
-                        <h1 className='text-center ' style={{ fontWeight: "bold" }}> chatbox is empty!!!</h1>
-                    </div>
-                    <div className="col-3"></div>
-                </div>
-            </div>
+                    <div className='container-fluid ' style={{ height: "65vh" }}>
+                        <div className="row">
+                            <div className="col-3"></div>
+                            <div className="col-6  text-info mt-5 pt-5  d-flex flex-column justify-content-center align-items-center">
+                                <img src="https://www.creativefabrica.com/wp-content/uploads/2023/10/26/Empty-meal-tray-Cartoon-kicthen-contain-Graphics-82559752-1.png" alt="" style={{ height: "200px" }} />
+                                <h1 className='text-center ' style={{ fontWeight: "bold" }}> chatbox is empty!!!</h1>
+                            </div>
+                            <div className="col-3"></div>
+                        </div>
+                    </div>}
+            </div>:
 
 
             <div className='container-fluid ' style={{ height: "65vh" }}>
@@ -72,7 +94,7 @@ function AdminChats() {
                     </div>
                     <div className="col-3"></div>
                 </div>
-            </div>
+            </div>}
 
         </>
     )

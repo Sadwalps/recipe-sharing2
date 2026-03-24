@@ -87,6 +87,6 @@ export const UpdateUserChatAPI = async (id, reqBody, reqHeader) => {
 }
 
 //api for get all chats details
-export const getAllChatsDetailAPI = async (reqHeader) => {
-    return await commonAPI(`GET`, `${serverURL}/admin-all-chats`, "", reqHeader)
+export const getAllChatsDetailAPI = async () => {
+    return await commonAPI(`GET`, `${serverURL}/admin-all-chats`)
 }
