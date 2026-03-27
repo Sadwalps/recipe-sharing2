@@ -3,11 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import EditChat from '../components/EditChat'
-import { getAllChatsDetailAPI } from '../service/allApi'
+import { deleteChatAPI, getAllChatsDetailAPI } from '../service/allApi'
 
 function AdminChats() {
     const [allChatDetails, setAllChatDetails] = useState([])
     const [token, setToken] = useState("")
+    const [deleteChatStatus, setDeleteChatStatus] = useState("")
 
     const getallchatsdetails = async () => {
         const result = await getAllChatsDetailAPI()
@@ -15,9 +16,27 @@ function AdminChats() {
     }
     console.log(allChatDetails);
 
+    const handleDelete = async (id) => {
+        if (sessionStorage.getItem("token")) {
+            const token = sessionStorage.getItem("token")
+            const reqHeader = {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+            const result = await deleteChatAPI(id, reqHeader)
+            console.log(result);
+            if (result.status == 200) {
+                alert(result.data)
+                setDeleteChatStatus(result)
+            } else {
+                alert(`Something went wrong`)
+            }
+        }
+    }
+
     useEffect(() => {
         getallchatsdetails()
-    }, [])
+    }, [deleteChatStatus])
 
     useEffect(() => {
         if (sessionStorage.getItem("token")) {
@@ -52,7 +71,7 @@ function AdminChats() {
             </div>
 
             {/* chats section */}
-          {  token?<div className='mb-4'>
+            {token ? <div className='mb-4'>
                 {allChatDetails ? <div className='container-fluid mt-3'>
                     {allChatDetails?.map((item) => (<div className="row mt-2">
                         <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
@@ -62,7 +81,7 @@ function AdminChats() {
                                 <h4 className='pt-1' style={{ fontWeight: "bold" }}>{item?.chat}</h4>
                                 <div className='d-flex justify-content-between'>
                                     <EditChat />
-                                    <button className='btn btn-light text-danger rounded'>
+                                    <button onClick={() => handleDelete(item?._id)} className='btn btn-light text-danger rounded'>
                                         <FontAwesomeIcon icon={faTrash} className='fs-4' />
                                     </button>
                                 </div>
@@ -82,19 +101,19 @@ function AdminChats() {
                             <div className="col-3"></div>
                         </div>
                     </div>}
-            </div>:
+            </div> :
 
 
-            <div className='container-fluid ' style={{ height: "65vh" }}>
-                <div className="row">
-                    <div className="col-3"></div>
-                    <div className="col-6  text-info mt-5 pt-5  d-flex flex-column justify-content-center align-items-center">
-                        <img src="https://cdn-icons-png.flaticon.com/512/9693/9693192.png" alt="" style={{ height: "200px" }} />
-                        <h1 className='text-center ' style={{ fontWeight: "bold" }}> Please Login!!!</h1>
+                <div className='container-fluid ' style={{ height: "65vh" }}>
+                    <div className="row">
+                        <div className="col-3"></div>
+                        <div className="col-6  text-info mt-5 pt-5  d-flex flex-column justify-content-center align-items-center">
+                            <img src="https://cdn-icons-png.flaticon.com/512/9693/9693192.png" alt="" style={{ height: "200px" }} />
+                            <h1 className='text-center ' style={{ fontWeight: "bold" }}> Please Login!!!</h1>
+                        </div>
+                        <div className="col-3"></div>
                     </div>
-                    <div className="col-3"></div>
-                </div>
-            </div>}
+                </div>}
 
         </>
     )

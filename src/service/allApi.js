@@ -90,3 +90,8 @@ export const UpdateUserChatAPI = async (id, reqBody, reqHeader) => {
 export const getAllChatsDetailAPI = async () => {
     return await commonAPI(`GET`, `${serverURL}/admin-all-chats`)
 }
+
+//api for delete chat
+export const deleteChatAPI = async (id, reqHeader) => {
+    return await commonAPI(`DELETE`, `${serverURL}/delete-chat/${id}`, {}, reqHeader)
+}
