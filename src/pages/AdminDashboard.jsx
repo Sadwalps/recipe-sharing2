@@ -2,16 +2,31 @@ import { faBowlFood, faMessage, faPowerOff, faTrash, faUser } from '@fortawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
-import { deleteUserAPI, getAllChatsDetailAPI, getAllUsersDetailsAPI } from '../service/allApi';
+import { deleteUserAPI, getAllChatsDetailAPI, getAllRecipesDetailAPI, getAllUsersDetailsAPI } from '../service/allApi';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 
 function AdminDashboard() {
-
+  const [allRecipesDetails, setAllRecipesDetails] = useState([])
   const [allUsersDetails, setAllUsersDetails] = useState([])
   const [allChatDetails, setAllChatDetails] = useState([])
   const [deleteUserStatus, setDeleteUserStatus] = useState("")
   const [token, setToken] = useState("")
+
+  const getallrecipesdetails = async () => {
+    if (sessionStorage.getItem("token")) {
+      const token = sessionStorage.getItem("token")
+      const reqHeader = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+      const result = await getAllRecipesDetailAPI(reqHeader)
+      console.log(result);
+      setAllRecipesDetails(result.data)
+    }
+  }
+  console.log(allRecipesDetails);
+
 
   const getallusersdetails = async () => {
     const result = await getAllUsersDetailsAPI()
@@ -57,10 +72,11 @@ function AdminDashboard() {
 
 
   useEffect(() => {
+    getallrecipesdetails()
     getallusersdetails()
     getallchatsdetails()
   }, [deleteUserStatus])
-  
+
   return (
     <>
 
@@ -73,8 +89,9 @@ function AdminDashboard() {
                 <h4 className='text-light ' style={{ fontWeight: "bold" }}>Reci</h4>
               </div>
               {token && <div className='d-flex flex-column gap-3 align-items-center justify-content-center mt-5' style={{ minHeight: "35vh" }}>
-                <Link to={'/adminallrecipes'}>  <button className='btn btn-info rounded ' style={{ height: "7rem", width: "7rem", fontSize: "3rem" }}>
+                <Link to={'/adminallrecipes'}>  <button className='btn btn-info rounded ' style={{ height: "7rem", width: "7rem", fontSize: "3rem", position: "relative" }}>
                   <FontAwesomeIcon icon={faBowlFood} className='' />
+                  {allRecipesDetails.map((item,index)=>(<div className='rounded  bg-light fs-5 px-2 text-info' style={{ position: "absolute", top: "1px", right: "1px", fontWeight: "bold" }} >{index + 1}</div>))}
                 </button></Link>
 
                 <button className='btn btn-success rounded ' style={{ height: "7rem", width: "7rem", fontSize: "3rem", position: "relative" }}>
@@ -84,7 +101,7 @@ function AdminDashboard() {
 
                 <Link to={'/adminchats'}> <button className='btn btn-primary rounded ' style={{ height: "7rem", width: "7rem", fontSize: "3rem", position: "relative" }}>
                   <FontAwesomeIcon icon={faMessage} />
-                  {allChatDetails.map((item,index)=>(<div className='rounded  bg-light fs-5 px-2 text-primary' style={{ position: "absolute", top: "1px", right: "1px", fontWeight: "bold" }} >{index + 1}</div>))}
+                  {allChatDetails.map((item, index) => (<div className='rounded  bg-light fs-5 px-2 text-primary' style={{ position: "absolute", top: "1px", right: "1px", fontWeight: "bold" }} >{index + 1}</div>))}
                   <div className='rounded  bg-light fs-5 px-2 text-primary' style={{ position: "absolute", top: "1px", right: "1px", fontWeight: "bold" }} ></div>
                 </button></Link>
               </div>}
@@ -103,8 +120,8 @@ function AdminDashboard() {
                     <div className="col-md-2"></div>
                     <div className="col-md-8">
                       <Link to={'/adminallrecipes'}><button className='btn btn-lg btn-info rounded py-3 w-100 ' style={{ fontWeight: "bold" }}><FontAwesomeIcon icon={faBowlFood} className='me-3' />View All Recipes </button> </Link>
-                      <Link to={'/adminallrecipes'} ><button className='btn btn-lg btn-success rounded py-3 w-100 mt-2' style={{ fontWeight: "bold",position:"relative" }}><FontAwesomeIcon icon={faUser} className='me-3' />Users {allUsersDetails.map((item, index) => (<div className='rounded  bg-light fs-5 px-2 text-success' style={{ position: "absolute", top: "1px", right: "1px", fontWeight: "bold" }} >{index + 1}</div>))}</button></Link>
-                      <Link to={'/adminchats'}><button className='btn btn-lg btn-primary rounded py-3 w-100 mt-2' style={{ fontWeight: "bold", position:"relative" }}><FontAwesomeIcon icon={faMessage} className='me-3' />View All Chats  {allChatDetails.map((item,index)=>(<div className='rounded  bg-light fs-5 px-2 text-primary' style={{ position: "absolute", top: "1px", right: "1px", fontWeight: "bold" }} >{index + 1}</div>))}</button></Link>
+                      <Link to={'/adminallrecipes'} ><button className='btn btn-lg btn-success rounded py-3 w-100 mt-2' style={{ fontWeight: "bold", position: "relative" }}><FontAwesomeIcon icon={faUser} className='me-3' />Users {allUsersDetails.map((item, index) => (<div className='rounded  bg-light fs-5 px-2 text-success' style={{ position: "absolute", top: "1px", right: "1px", fontWeight: "bold" }} >{index + 1}</div>))}</button></Link>
+                      <Link to={'/adminchats'}><button className='btn btn-lg btn-primary rounded py-3 w-100 mt-2' style={{ fontWeight: "bold", position: "relative" }}><FontAwesomeIcon icon={faMessage} className='me-3' />View All Chats  {allChatDetails.map((item, index) => (<div className='rounded  bg-light fs-5 px-2 text-primary' style={{ position: "absolute", top: "1px", right: "1px", fontWeight: "bold" }} >{index + 1}</div>))}</button></Link>
                     </div>
                     <div className="col-md-2"></div>
                   </div>
