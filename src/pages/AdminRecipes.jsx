@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { getAllRecipesDetailAPI } from '../service/allApi';
+import { deleteRecipeAPI, getAllRecipesDetailAPI } from '../service/allApi';
 import { serverURL } from '../service/serverUrl';
 
 
@@ -13,7 +13,7 @@ function AdminRecipes() {
     const [token, setToken] = useState("")
     const [allRecipes, setAllRecipes] = useState([])
     console.log(allRecipes);
-
+    const [deleteRecipeStatus, setDeleteRecipeStatus] = useState({})
 
     const getAllRecipes = async () => {
         if (sessionStorage.getItem("token")) {
@@ -29,12 +29,31 @@ function AdminRecipes() {
         }
     }
 
+    const handleDelete = async (id) => {
+        if (token) {
+            const token = sessionStorage.getItem("token")
+            const reqHeader = {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+            const result = await deleteRecipeAPI(id, reqHeader)
+            console.log(result);
+            if (result.status == 200) {
+                alert(result.data)
+                setDeleteRecipeStatus(result)
+            } else {
+                alert(`Something went wrong`)
+            }
+        }
+    }
+
+
     useEffect(() => {
         getAllRecipes()
         if (sessionStorage.getItem("token")) {
             setToken(sessionStorage.getItem("token"))
         }
-    }, [])
+    }, [deleteRecipeStatus])
 
     return (
         <>
@@ -43,7 +62,6 @@ function AdminRecipes() {
                 <div className='d-flex justify-content-center align-items-center gap-3 w-25' style={{ minHeight: "10vh" }}>
                     <Link to={'/admin'}>    <img className='' src="https://cdn-icons-png.freepik.com/512/10840/10840480.png" alt="app img" style={{ height: "45", width: "45px" }} /></Link>
                 </div>
-
             </div>
 
 
@@ -57,12 +75,9 @@ function AdminRecipes() {
                         <div className='mt-4'>
                             <h1 className='mainhead'>All Recipes</h1>
                         </div>
-
-
                     </div>
                     <div className="col-md-2"></div>
                 </div>
-
             </div>
 
 
@@ -85,7 +100,7 @@ function AdminRecipes() {
                                         <h5 className='mb-2'>{item?.category
 
                                         }</h5>
-                                        <Button variant="danger clas
+                                        <Button onClick={() => handleDelete(item?._id)} variant="danger clas
                                         rounded " style={{ fontWeight: "bold" }}><FontAwesomeIcon icon={faTrash} style={{ color: "white", marginRight: "7px" }} />Remove</Button>
                                     </Card.Body>
                                 </Card>

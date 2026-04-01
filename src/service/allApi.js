@@ -66,6 +66,11 @@ export const getAllRecipesDetailAPI = async (reqHeader) => {
     return await commonAPI(`GET`, `${serverURL}/admin-all-recipes`, "", reqHeader)
 }
 
+//api for delete recipe
+export const deleteRecipeAPI = async (id, reqHeader) => {
+    return await commonAPI(`DELETE`, `${serverURL}/delete-recipe/${id}`, {}, reqHeader)
+}
+
 //api for add chats
 export const addChatAPI = async (reqBody, reqHeader) => {
     return await commonAPI(`POST`, `${serverURL}/add-chats`, reqBody, reqHeader)
