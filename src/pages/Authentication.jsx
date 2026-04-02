@@ -11,6 +11,14 @@ function Authentication({ signup }) {
     })
     console.log(authdetails);
 
+     const handleCancel = () => {
+        setAuthdetails({
+            username: "",
+            email: "",
+            password: ""
+        })
+    }
+
     const handleRegister = async () => {
         const { username, email, password } = authdetails
         console.log(username, email, password);
@@ -72,11 +80,10 @@ function Authentication({ signup }) {
 
                                     <button type='button' onClick={handleRegister} className='btn btn-primary p-2 w-100  mt-lg-3 mt-2' style={{ borderRadius: "20px" }} >SIGN UP</button>}
 
-                                {signup ? <p className='mt-3 text-white'>Already a user? click here to <Link to={'/login'}>login</Link> </p> :
-                                    <p className='mt-3 text-white'>Not a user? click here to <Link to={'/signup'}>signup</Link> </p>}
+                                {signup ? <div className='d-flex justify-content-between'><p className='mt-3 text-white'>Already a user? click here to <Link to={'/login'}>login</Link> </p>  <button onClick={handleCancel} className='btn btn-danger my-2 rounded 'style={{height:"40px"}}>Clear</button></div>  :
+                                   <div className='d-flex justify-content-between'> <p className='mt-3 text-white'>Not a user? click here to <Link to={'/signup'}>signup</Link> </p>  <button onClick={handleCancel} className='btn btn-danger my-2 rounded 'style={{height:"40px"}}>Clear</button> </div>}
                             </div>
                         </div>
-
                         <div className="col-md-4"></div>
                     </div>
                 </div>

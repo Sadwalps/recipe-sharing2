@@ -11,6 +11,14 @@ function AdminAuthentication({ adminSignup }) {
     })
     console.log(adminDetails);
 
+    const handleCancel = () => {
+        setAdminDetails({
+            adminname: "",
+            email: "",
+            password: ""
+        })
+    }
+
     const handleRegister = async () => {
         const { adminname, email, password } = adminDetails
         console.log(adminname, email, password);
@@ -78,8 +86,8 @@ function AdminAuthentication({ adminSignup }) {
 
                                     <button onClick={handleRegister} type='button' className='btn btn-primary p-2 w-100  mt-lg-3 mt-2' style={{ borderRadius: "20px" }} >SIGN UP</button>}
 
-                                {adminSignup ? <p className='mt-3 text-white'>Already a user? click here to <Link to={'/adminLogin'}>login</Link> </p> :
-                                    <p className='mt-3 text-white'>Not a user? click here to <Link to={'/adminSignup'}>signup</Link> </p>}
+                                {adminSignup ? <div className='d-flex justify-content-between'> <p className='mt-3 text-white'>Already a user? click here to <Link to={'/adminLogin'}>login</Link> </p> <button onClick={handleCancel} className='btn btn-danger my-2 rounded ' style={{ height: "40px" }}>Clear</button> </div> :
+                                    <div className='d-flex justify-content-between'> <p className='mt-3 text-white'>Not a user? click here to <Link to={'/adminSignup'}>signup</Link> </p> <button onClick={handleCancel} className='btn btn-danger my-2 rounded ' style={{ height: "40px" }}>Clear</button></div>}
                             </div>
                         </div>
 
