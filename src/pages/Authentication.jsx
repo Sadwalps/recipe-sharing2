@@ -51,6 +51,7 @@ function Authentication({ signup }) {
                 sessionStorage.setItem("existingUser", JSON.stringify(result.data.existingUser
                 ))
                 sessionStorage.setItem("token", result.data.token)
+                sessionStorage.setItem("userstatus", "user")
                 alert(`Login successfull`)
                 navigate('/')
             } else if (result.status == 406) {

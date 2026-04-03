@@ -9,6 +9,8 @@ import { loginResponseContext } from '../context/ContextShare';
 function Header() {
   const { setLoginResponse } = useContext(loginResponseContext)
   const [token, setToken] = useState("")
+  const [userStatus, setUserStauts] = useState("")
+  console.log(userStatus);
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -17,10 +19,17 @@ function Header() {
     }
   })
 
+  useEffect(() => {
+    if (sessionStorage.getItem("userstatus")) {
+      setUserStauts(sessionStorage.getItem("userstatus"))
+    }
+  })
+
 
   const handleLogout = () => {
     sessionStorage.removeItem("existingUser")
     sessionStorage.removeItem("token")
+    sessionStorage.removeItem("userstatus")
     setLoginResponse(false)
     alert(`Logging out`)
     navigate('/')
@@ -32,7 +41,7 @@ function Header() {
       <div>
         <Navbar className="bg-dark" >
           <Container className="d-flex justify-content-between">
-            <Link to={'/'} >
+            {userStatus ? <Link to={'/'} >
               <img
                 src="https://cdn-icons-png.freepik.com/512/10840/10840480.png"
                 width="45"
@@ -40,14 +49,22 @@ function Header() {
                 className="d-inline-block align-top m-1"
                 alt="Websitelogo"
               />
-            </Link>
+            </Link> :
+              <Link to={'/admin'} >
+                <img
+                  src="https://cdn-icons-png.freepik.com/512/10840/10840480.png"
+                  width="45"
+                  height="45"
+                  className="d-inline-block align-top m-1"
+                  alt="Websitelogo"
+                />
+              </Link>}
             <div className='d-flex gap-3'>
-              <Link to={'/chats'} > <button className='btn fs-5' id='chatbtn'  ><FontAwesomeIcon icon={faMessage} /></button></Link>
+              {userStatus && <Link to={'/chats'} > <button className='btn fs-5' id='chatbtn'  ><FontAwesomeIcon icon={faMessage} /></button></Link>}
               <div onClick={handleLogout} id='logoutdiv'>
                 <FontAwesomeIcon icon={faPowerOff} />
               </div>
             </div>
-
           </Container>
         </Navbar>
       </div>
