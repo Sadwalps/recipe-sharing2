@@ -145,7 +145,7 @@ function AdminDashboard() {
                           <td>{index + 1}</td>
                           <td>{item?.username}</td>
                           <td>{item?.email}</td>
-                          <td><Link ><button className='btn btn-sm btn-primary rounded'>View Recipes</button></Link></td>
+                          <td><Link to={'/adminuserrecipes'}><button className='btn btn-sm btn-primary rounded'>View Recipes</button></Link></td>
                           <td><button onClick={() => handleDelete(item?._id)} className='btn btn-danger p-1  rounded'>
                             <FontAwesomeIcon icon={faTrash} />
                           </button></td>

@@ -13,6 +13,7 @@ import AdminAuthentication from './pages/AdminAuthentication'
 import AdminRecipes from './pages/AdminRecipes'
 import AdminChats from './pages/AdminChats'
 import UserChats from './pages/UserChats'
+import AdminRecipes2 from './pages/AdminRecipes2'
 
 function App() {
   const { loginResponse } = useContext(loginResponseContext)
@@ -25,13 +26,14 @@ function App() {
         <Route path='/adminSignup' element={<AdminAuthentication adminSignup={true} />} />
         <Route path='/adminLogin' element={<AdminAuthentication />} />
         <Route path='/login' element={<Authentication />} />
-        <Route path='/myrecipes' element={ <MyRecipes /> } />
+        <Route path='/myrecipes' element={<MyRecipes />} />
         <Route path='/allrecipes' element={loginResponse ? <AllRecipes /> : <PageNotFound />} />
-        <Route path='/admin' element={ <AdminDashboard />} />
-        <Route path='/adminallrecipes' element={<AdminRecipes/>}/>
-        <Route path='/chats' element={<UserChats/>}/>
-        <Route path='/adminchats' element={<AdminChats/>}/>
+        <Route path='/admin' element={<AdminDashboard />} />
+        <Route path='/adminallrecipes' element={<AdminRecipes />} />
+        <Route path='/chats' element={<UserChats />} />
+        <Route path='/adminchats' element={<AdminChats />} />
         <Route path='*' element={<PageNotFound />} />
+        <Route path='/adminuserrecipes' element={<AdminRecipes2 />} />
       </Routes>
     </>
   )
