@@ -71,6 +71,11 @@ export const deleteRecipeAPI = async (id, reqHeader) => {
     return await commonAPI(`DELETE`, `${serverURL}/delete-recipe/${id}`, {}, reqHeader)
 }
 
+//api for get single user's recipes
+export const getSingleUsersRecipeAPI = async (reqHeader) => {
+    return await commonAPI(`GET`, `${serverURL}/user-recipes`, "", reqHeader)
+}
+
 //api for add chats
 export const addChatAPI = async (reqBody, reqHeader) => {
     return await commonAPI(`POST`, `${serverURL}/add-chats`, reqBody, reqHeader)
