@@ -1,11 +1,33 @@
 import { faClock, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
+import { SingleUsersRecipeContext } from '../context/ContextShare'
 
 function AdminRecipes2() {
+    const{singleUsersRecipe} = useContext(SingleUsersRecipeContext)
+    console.log(singleUsersRecipe);
+    const [recipedetails, setRecipedetails] = useState([])
+    console.log(recipedetails);
+    
+    
+    const [uid, setUid] = useState("")
+console.log(uid);
+
+  useEffect(()=>{
+    if(sessionStorage.getItem("uid")){
+    setUid(sessionStorage.getItem("uid"))
+    }
+  })
+
+  useEffect(()=>{
+    
+  },[singleUsersRecipe])
+
+  
+ 
   return (
     <>
       <div className='d-flex justify-content-between align-items-center px-3 bg-dark' style={{ minHeight: "10vh" }}>
@@ -33,16 +55,16 @@ function AdminRecipes2() {
 
 
             {/* recipes card section */}
-             <div className='container-fluid mt-lg-5 mt-3'>
+           {singleUsersRecipe ? <div className='container-fluid mt-lg-5 mt-3'>
                 <div className="row">
-                    <div className="col-md-6 mt-4">
-                        <div className="row">
+                   {singleUsersRecipe?.map((item )=>( <div className="col-md-6 mt-4">
+                       <div className="row">
                             <div className="col-md-2"></div>
-                            <div className="col-md-8">
+                             <div className="col-md-8">
                                 <Card className='border-0' style={{ width: '100%' }}>
                                     <Card.Img variant="top" src='https://tse1.mm.bing.net/th/id/OIP.-OeEPP-2XySfb7SXHYAR9gHaFj?rs=1&pid=ImgDetMain&o=7&rm=3' />
                                     <Card.Body>
-                                        <h1 className='' style={{ fontWeight: "bold" }}>item?.recipename</h1>
+                                        <h1 className='' style={{ fontWeight: "bold" }}>{item?.recipename}</h1>
                                         <h5 className='mt-lg-2 mt-1 '>
                                             <FontAwesomeIcon icon={faClock} className='me-2' />item?.time
                                         </h5>
@@ -58,7 +80,7 @@ function AdminRecipes2() {
                             </div>
                             <div className="col-md-2"></div>
                         </div>
-                    </div>
+                    </div>))}
                 </div>
             </div> :
 
@@ -73,7 +95,7 @@ function AdminRecipes2() {
                             <div className="col-3"></div>
                         </div>
                     </div>
-                </div>
+                </div>}
             <Footer />
     </>
   )
