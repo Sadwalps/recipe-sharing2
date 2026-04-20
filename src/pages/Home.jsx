@@ -249,7 +249,6 @@ function Home() {
 
                     </div>
 
-
                     <div className='container-fluid'>
                         <div className="row">
                             {homeRecipes?.map((item) => (<div className="col-md-6">
@@ -266,7 +265,6 @@ function Home() {
 
                     </div>
 
-
                     <div className='container-fluid mt-4 mb-3 '>
 
                         <div className="row p-1">
@@ -280,7 +278,6 @@ function Home() {
 
                     </div>
                 </div>}
-
 
             <Footer />
         </>
