@@ -84,7 +84,7 @@ function AdminRecipes() {
             {/* recipes card section */}
             {allRecipes?.length > 0 ? <div className='container-fluid mt-lg-5 mt-3'>
                 <div className="row">
-                    {allRecipes?.map((item) => (<div className="col-md-6 mt-4">
+                    {allRecipes?.map((item) => (<div className="col-md-6 mt-4 mb-4">
                         <div className="row">
                             <div className="col-md-2"></div>
                             <div className="col-md-8">
@@ -102,7 +102,9 @@ function AdminRecipes() {
                                         }</h5>
                                         <Button onClick={() => handleDelete(item?._id)} variant="danger clas
                                         rounded " style={{ fontWeight: "bold" }}><FontAwesomeIcon icon={faTrash} style={{ color: "white", marginRight: "7px" }} />Remove</Button>
+                                       
                                     </Card.Body>
+                                     <div className='w-100 bg-dark text-light p-2 ' style={{fontWeight:"bold"}}>Submitted By:  {item?.userName}</div>
                                 </Card>
                             </div>
                             <div className="col-md-2"></div>

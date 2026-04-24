@@ -21,7 +21,7 @@ function Home() {
     console.log(homeRecipes);
     const [userName, setUsername] = useState("")
     console.log(userName);
-    
+
 
 
     const [recipeDetails, setRecipeDetails] = useState({
@@ -67,7 +67,9 @@ function Home() {
     const handleAdd = async () => {
         const { recipename, time, incredients, category, recipeImage } = recipeDetails
         console.log(recipename, time, incredients, category, recipeImage);
-        if (!recipename || !time || !incredients || !category) {
+        console.log(userName);
+        
+        if (!recipename || !time || !incredients || !category ||!userName) {
             alert(`Fill the completely`)
         } else {
 
@@ -77,6 +79,7 @@ function Home() {
             reqBody.append("incredients", incredients)
             reqBody.append("category", category)
             reqBody.append("recipeImage", recipeImage)
+            reqBody.append("userName",userName)
 
             if (token) {
                 const reqHeader = {
@@ -136,13 +139,13 @@ function Home() {
         }
     })
 
-    useEffect(()=>{
+    useEffect(() => {
         const userData = sessionStorage.getItem("existingUser")
-        if(userData){
+        if (userData) {
             const usersname = JSON.parse(userData)
             setUsername(usersname.username)
         }
-    },[])
+    }, [])
 
 
 
@@ -171,7 +174,7 @@ function Home() {
                     <Header />
 
                     <div id='home2' >
-                       
+
                         <div className='container-fluid'>
                             <div className="row pt-lg-5 pt-4 ">
                                 <div className="col-md-2"></div>
@@ -180,7 +183,7 @@ function Home() {
                                         RECI
                                     </div>
                                     <h1 className='mainhead'>Submit recipes</h1>
-                                    <h2 className='text-light' style={{fontWeight:"bold"}}>Welcome {userName}</h2>
+                                    <h2 className='text-light' style={{ fontWeight: "bold" }}>Welcome {userName}</h2>
                                     <h3 className='text-light ps-lg-1 ps-2' style={{ fontWeight: "bold" }}>Easily share your own recipe on our website </h3>
                                     <button onClick={handleShow} className='btn btn-info px-lg-5 px-4 py-lg-2 py-2  mt-3 fs-lg-4 fs-5' style={{ borderRadius: "25px", fontWeight: "bold" }}>SUBMIT A RECIPE</button>
 
@@ -189,8 +192,18 @@ function Home() {
                                             <Modal.Title style={{ fontWeight: "bold" }} className='text-light'>Share Your Recipe</Modal.Title>
                                         </Modal.Header>
                                         <Modal.Body style={{ backgroundColor: "rgba(27, 26, 26, 0.93)" }}>
+
+                                            <div className='d-flex flex-column justify-content-center align-items-center mb-3'>
+
+
+                                                <h3 className='text-light' style={{ fontWeight: "bold" }}>username</h3>
+                                                <input value={userName} type="text" readOnly className='w-75 form-control py-1  text-center' style={{ borderRadius: "15px", fontWeight: "bold" }} />
+
+                                            </div>
                                             <div>
+
                                                 <div className="row">
+
                                                     <div className="col-md-2"></div>
                                                     <div className="col-md-8 text-center ">
                                                         <label htmlFor="recipeImage">
@@ -214,6 +227,9 @@ function Home() {
                                                     <option value="Deserts" style={{ fontWeight: "bold" }}>Deserts</option>
                                                     <option value="Snacks" style={{ fontWeight: "bold" }}>Snacks</option>
                                                 </select>
+
+
+
                                             </div>
 
                                         </Modal.Body>
