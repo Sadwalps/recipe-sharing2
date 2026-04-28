@@ -19,6 +19,9 @@ function Edit({ recipes }) {
   })
   console.log(recipeDetails);
 
+  const [userName, setUsername] = useState("")
+  console.log(userName);
+
   const [preview, setPreview] = useState("")
   const [key, setKey] = useState(0)
 
@@ -111,6 +114,15 @@ function Edit({ recipes }) {
     }
   }, [recipeDetails.recipeImage])
 
+
+  useEffect(() => {
+    const userData = sessionStorage.getItem("existingUser")
+    if (userData) {
+      const usersname = JSON.parse(userData)
+      setUsername(usersname.username)
+    }
+  }, [])
+
   return (
     <>
       <div className='coveringdiv'><div onClick={handleShow} className='bg-primary d-flex justify-content-center align-items-center rounded' id='editbutton' ><FontAwesomeIcon icon={faPenToSquare} style={{ color: "black" }} /></div></div>
@@ -118,18 +130,26 @@ function Edit({ recipes }) {
         <Modal.Header closeButton className='bg-dark'>
           <Modal.Title className='bg-dark text-light' style={{ fontWeight: "bold" }}  >Share Your Recipe</Modal.Title>
         </Modal.Header>
-        <Modal.Body className='bg-dark'><div>
-          <div className="row">
-            <div className="col-md-2"></div>
-            <div className="col-md-8 text-center ">
-              <label htmlFor="recipeImage">
-                <input key={key} onChange={(e) => handleFile(e)} id='recipeImage' type="file" style={{ display: "none" }} />
-                <img src={preview ? preview : `${serverURL}/upload/${recipes?.recipeImage}`} alt="" style={{ width: "100%" }} type="file" />
-              </label>
-            </div>
-            <div className="col-md-2"></div>
+        <Modal.Body className='bg-dark'>
+          <div className='d-flex flex-column justify-content-center align-items-center mb-3'>
+
+
+            <h3 className='text-light' style={{ fontWeight: "bold" }}>username</h3>
+            <input value={userName} type="text" readOnly className='w-75 form-control py-1  text-center' style={{ borderRadius: "15px", fontWeight: "bold" }} />
+
           </div>
-        </div>
+          <div>
+            <div className="row">
+              <div className="col-md-2"></div>
+              <div className="col-md-8 text-center ">
+                <label htmlFor="recipeImage">
+                  <input key={key} onChange={(e) => handleFile(e)} id='recipeImage' type="file" style={{ display: "none" }} />
+                  <img src={preview ? preview : `${serverURL}/upload/${recipes?.recipeImage}`} alt="" style={{ width: "100%" }} type="file" />
+                </label>
+              </div>
+              <div className="col-md-2"></div>
+            </div>
+          </div>
 
           <div className='d-flex flex-column justify-content-center align-items-center'>
             <input value={recipeDetails.recipename} onChange={(e) => setRecipeDetails({ ...recipeDetails, recipename: e.target.value })} type="text" className='w-75 form-control mt-lg-4 mt-3 text-center' style={{ borderRadius: "15px", fontWeight: "bold" }} placeholder='Name of the Recipe' />
