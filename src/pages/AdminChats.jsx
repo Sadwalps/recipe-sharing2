@@ -80,7 +80,7 @@ function AdminChats() {
                                 <h5 className='pt-3' style={{ fontWeight: "bold" }}>Username : {item?.username}</h5>
                                 <h4 className='pt-1' style={{ fontWeight: "bold" }}>{item?.chat}</h4>
                                 <div className='d-flex justify-content-between'>
-                                    <EditChat />
+                                    <EditChat chats={item} />
                                     <button onClick={() => handleDelete(item?._id)} className='btn btn-light text-danger rounded'>
                                         <FontAwesomeIcon icon={faTrash} className='fs-4' />
                                     </button>

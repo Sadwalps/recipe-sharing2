@@ -30,6 +30,7 @@ function Header() {
     sessionStorage.removeItem("existingUser")
     sessionStorage.removeItem("token")
     sessionStorage.removeItem("userstatus")
+    sessionStorage.removeItem("existingAdmin")
     setLoginResponse(false)
     alert(`Logging out`)
     navigate('/')

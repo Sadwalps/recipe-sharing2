@@ -1,23 +1,31 @@
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare, faReply } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { UpdateUserChatAPI } from '../service/allApi';
 
-function EditChat({ chats,setEditChatStatus }) {
+function EditChat({ chats, setEditChatStatus }) {
     const [show, setShow] = useState(false);
+    const [isAdmin, setIsAdmin] = useState("")
+    console.log(isAdmin);
+
     const [chatDetails, setChatDetails] = useState({
         chat: chats?.chat
     })
     console.log(chatDetails);
+
+    const [usernameInAdminside, setUsernameInAdminside] = useState({
+        username: chats?.username
+    })
+    console.log(usernameInAdminside);
+
 
     const [username, setUsername] = useState("")
     console.log(username);
     const handleShow = () => setShow(true);
 
     const handleClose = () => {
-
         setShow(false);
     }
 
@@ -72,14 +80,25 @@ function EditChat({ chats,setEditChatStatus }) {
         }
     }, [])
 
+    useEffect(() => {
+        if (sessionStorage.getItem("existingAdmin")) {
+            setIsAdmin(sessionStorage.getItem("existingAdmin"))
+        }
+    }, [])
+
 
     return (
         <>
-            <button onClick={handleShow} className='btn btn-light rounded text-primary'>
+            {!isAdmin ? <button onClick={handleShow} className='btn btn-light rounded text-primary'>
                 <FontAwesomeIcon icon={faPenToSquare} className=' fs-4' />
-            </button>
+            </button> :
 
-            <Modal show={show} onHide={handleClose} >
+                <button onClick={handleShow} className='btn btn-light rounded text-primary'>
+                    <FontAwesomeIcon icon={faReply} className=' fs-4' />
+                </button>}
+
+
+            {!isAdmin ? <Modal show={show} onHide={handleClose} >
                 <Modal.Header closeButton>
                     <Modal.Title className='text-primary' style={{ fontWeight: "bold" }}>Edit chats</Modal.Title>
                 </Modal.Header>
@@ -101,7 +120,31 @@ function EditChat({ chats,setEditChatStatus }) {
                         save changes
                     </Button>
                 </Modal.Footer>
-            </Modal>
+            </Modal> :
+
+                <Modal show={show} onHide={handleClose} >
+                    <Modal.Header closeButton>
+                        <Modal.Title className='text-primary' style={{ fontWeight: "bold" }}>send reply </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div className='d-flex  gap-2 justify-content-center align-items-center'>
+                            <h5 className='text-primary ' style={{ fontWeight: "bold" }}>Username:</h5>
+                            <input value={usernameInAdminside.username} readOnly type="text" className='bg-light text-primary form-control py-1 my-2 text-center rounded w-50' style={{ fontWeight: "bold" }} />
+                        </div>
+
+                        <textarea value={chatDetails.chat} onChange={(e) => setChatDetails({ ...chatDetails, chat: e.target.value })} name="" id="" className='bg-primary form-control py-1 my-2 text-center rounded' placeholder='****' style={{ fontWeight: "bold" }}>
+
+                        </textarea>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={handleCancel} variant="danger" >
+                            Cancel
+                        </Button>
+                        <Button onClick={handleUpdate} variant="primary" >
+                            save changes
+                        </Button>
+                    </Modal.Footer>
+                </Modal>}
         </>
     )
 }
