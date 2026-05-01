@@ -1,6 +1,6 @@
 import { faPenToSquare, faReply } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect, useState } from 'react'
+import React, {   useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { UpdateUserChatAPI } from '../service/allApi';
@@ -19,7 +19,6 @@ function EditChat({ chats, setEditChatStatus }) {
         username: chats?.username
     })
     console.log(usernameInAdminside);
-
 
     const [username, setUsername] = useState("")
     console.log(username);
@@ -59,7 +58,7 @@ function EditChat({ chats, setEditChatStatus }) {
 
                 if (result.status == 200) {
                     alert(`Chat successfully edited`)
-                    setEditChatStatus(result)
+                   setEditChatStatus(result)
                     setTimeout(() => {
                         handleClose()
                     }, [2000]);
@@ -71,6 +70,46 @@ function EditChat({ chats, setEditChatStatus }) {
             }
         }
     }
+
+    // const handleReply = async () => {
+    //     const { username } = usernameInAdminside
+    //     console.log(username);
+    //     const { chat } = chatDetails
+    //     console.log(chat);
+
+    //     if (!username || !chat) {
+    //         alert(`Fill the form completely`)
+    //     } else {
+    //         const reqBody = new FormData()
+    //         reqBody.append("username", username)
+    //         reqBody.append("chat", chat)
+    //         console.log(reqBody);
+
+    //         //reqHeader
+    //         const token = sessionStorage.getItem("token")
+    //         if (token) {
+    //             const reqHeader = {
+    //                 "Content-Type": "application/json",
+    //                 "Authorization": `Bearer ${token}`
+    //             }
+    //             const result = await UpdateUserChatAPI(chats._id, reqBody, reqHeader)
+    //             console.log(result);
+
+    //             if (result.status == 200) {
+    //                 alert(`Chat successfully send`)
+                    
+    //                 setTimeout(() => {
+    //                     handleClose()
+    //                 }, [2000]);
+    //             } else if (result.status == 406) {
+    //                 alert(result.response.data)
+    //             } else {
+    //                 alert(`Something went wrong`)
+    //             }
+    //         }
+    //     }
+
+    // }
 
     useEffect(() => {
         const userData = sessionStorage.getItem("existingUser")
@@ -140,8 +179,9 @@ function EditChat({ chats, setEditChatStatus }) {
                         <Button onClick={handleCancel} variant="danger" >
                             Cancel
                         </Button>
-                        <Button onClick={handleUpdate} variant="primary" >
-                            save changes
+
+                        <Button onClick={handleReply} variant="primary" >
+                            send reply
                         </Button>
                     </Modal.Footer>
                 </Modal>}

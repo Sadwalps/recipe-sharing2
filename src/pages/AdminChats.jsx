@@ -9,6 +9,7 @@ function AdminChats() {
     const [allChatDetails, setAllChatDetails] = useState([])
     const [token, setToken] = useState("")
     const [deleteChatStatus, setDeleteChatStatus] = useState("")
+    const [sendStatus, setSendStatus] = useState([])
 
     const getallchatsdetails = async () => {
         const result = await getAllChatsDetailAPI()
@@ -36,7 +37,7 @@ function AdminChats() {
 
     useEffect(() => {
         getallchatsdetails()
-    }, [deleteChatStatus])
+    }, [deleteChatStatus,sendStatus])
 
     useEffect(() => {
         if (sessionStorage.getItem("token")) {
@@ -67,7 +68,6 @@ function AdminChats() {
                     </div>
                     <div className="col-md-2"></div>
                 </div>
-
             </div>
 
             {/* chats section */}
@@ -80,7 +80,7 @@ function AdminChats() {
                                 <h5 className='pt-3' style={{ fontWeight: "bold" }}>Username : {item?.username}</h5>
                                 <h4 className='pt-1' style={{ fontWeight: "bold" }}>{item?.chat}</h4>
                                 <div className='d-flex justify-content-between'>
-                                    <EditChat chats={item} />
+                                    <EditChat chats={item}  setSendStatus={setSendStatus} /> 
                                     <button onClick={() => handleDelete(item?._id)} className='btn btn-light text-danger rounded'>
                                         <FontAwesomeIcon icon={faTrash} className='fs-4' />
                                     </button>
