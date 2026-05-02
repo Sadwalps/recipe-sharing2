@@ -13,7 +13,7 @@ function UserChats() {
     const [userChats, setUserChats] = useState([])
     console.log(userChats);
 
-    const [ editChatStatus, setEditChatStatus] = useState([])
+    const [editChatStatus, setEditChatStatus] = useState([])
 
     const [addChatStatus, setAddChatStatus] = useState([])
 
@@ -59,7 +59,7 @@ function UserChats() {
 
     useEffect(() => {
         getUserChats()
-    }, [addChatStatus, deleteChatStatus,editChatStatus])
+    }, [addChatStatus, deleteChatStatus, editChatStatus])
 
     return (
         <>
@@ -71,7 +71,7 @@ function UserChats() {
                         <AddChats setAddChatStatus={setAddChatStatus} />
                     </div>
 
-                    {userChats ? <div className='container-fluid mb-4'>
+                    {userChats?.length > 0 ? <div className='container-fluid mb-4'>
                         {userChats?.map((item) => (<div className="row mt-3">
                             <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
                             <div className="col-lg-8 col-md-8 col-sm-8 col-12">
@@ -90,7 +90,6 @@ function UserChats() {
                         </div>))}
                     </div> :
 
-
                         <div className='container-fluid ' style={{ height: "65vh" }}>
                             <div className="row">
                                 <div className="col-3"></div>
@@ -102,7 +101,6 @@ function UserChats() {
                             </div>
                         </div>}
                 </div> :
-
 
                     <div className='container-fluid ' style={{ height: "65vh" }}>
                         <div className="row">

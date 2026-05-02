@@ -13,7 +13,6 @@ import AdminAuthentication from './pages/AdminAuthentication'
 import AdminRecipes from './pages/AdminRecipes'
 import AdminChats from './pages/AdminChats'
 import UserChats from './pages/UserChats'
-import AdminRecipes2 from './pages/AdminRecipes2'
 
 function App() {
   const { loginResponse } = useContext(loginResponseContext)
@@ -32,8 +31,7 @@ function App() {
         <Route path='/adminallrecipes' element={<AdminRecipes />} />
         <Route path='/chats' element={<UserChats />} />
         <Route path='/adminchats' element={<AdminChats />} />
-        <Route path='*' element={<PageNotFound />} />
-        <Route path='/adminuserrecipes' element={<AdminRecipes2 />} />
+        <Route path='*' element={<PageNotFound />} />   
       </Routes>
     </>
   )

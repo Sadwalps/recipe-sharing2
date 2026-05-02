@@ -37,7 +37,7 @@ function AdminChats() {
 
     useEffect(() => {
         getallchatsdetails()
-    }, [deleteChatStatus,sendStatus])
+    }, [deleteChatStatus, sendStatus])
 
     useEffect(() => {
         if (sessionStorage.getItem("token")) {
@@ -72,19 +72,16 @@ function AdminChats() {
 
             {/* chats section */}
             {token ? <div className='mb-4'>
-                {allChatDetails ? <div className='container-fluid mt-3'>
+                {allChatDetails.length>0 ? <div className='container-fluid mt-3'>
                     {allChatDetails?.map((item) => (<div className="row mt-2">
                         <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
                         <div className="col-lg-8 col-md-8 col-sm-8 col-12">
-                            <div className='w-100 mt-2 rounded   text-center text-light p-1 chatdivandbtn' >
+                            <div className='w-100 mt-2 rounded   text-center text-light p-1 chatdivandbtn' style={{ position: "relative" }} >
                                 <h5 className='pt-3' style={{ fontWeight: "bold" }}>Username : {item?.username}</h5>
                                 <h4 className='pt-1' style={{ fontWeight: "bold" }}>{item?.chat}</h4>
-                                <div className='d-flex justify-content-between'>
-                                    <EditChat chats={item}  setSendStatus={setSendStatus} /> 
-                                    <button onClick={() => handleDelete(item?._id)} className='btn btn-light text-danger rounded'>
-                                        <FontAwesomeIcon icon={faTrash} className='fs-4' />
-                                    </button>
-                                </div>
+                                <button onClick={() => handleDelete(item?._id)} className='btn btn-light text-danger rounded' style={{ position: "absolute", right: "2px", bottom: "2px" }}  >
+                                    <FontAwesomeIcon icon={faTrash} className='fs-4' />
+                                </button>
                             </div>
                         </div>
                         <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
