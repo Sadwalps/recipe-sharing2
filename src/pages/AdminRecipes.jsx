@@ -82,6 +82,7 @@ function AdminRecipes() {
 
 
             {/* recipes card section */}
+           { token?<div>
             {allRecipes?.length > 0 ? <div className='container-fluid mt-lg-5 mt-3'>
                 <div className="row">
                     {allRecipes?.map((item) => (<div className="col-md-6 mt-4 mb-4">
@@ -123,6 +124,18 @@ function AdminRecipes() {
                             </div>
                             <div className="col-3"></div>
                         </div>
+                    </div>
+                </div>}
+                </div>:
+
+                <div className='container-fluid ' style={{ height: "65vh" }}>
+                    <div className="row">
+                        <div className="col-3"></div>
+                        <div className="col-6  text-info mt-5 pt-5  d-flex flex-column justify-content-center align-items-center">
+                            <img src="https://cdn-icons-png.flaticon.com/512/9693/9693192.png" alt="" style={{ height: "200px" }} />
+                            <h1 className='text-center ' style={{ fontWeight: "bold" }}> Please Login!!!</h1>
+                        </div>
+                        <div className="col-3"></div>
                     </div>
                 </div>}
             <Footer />

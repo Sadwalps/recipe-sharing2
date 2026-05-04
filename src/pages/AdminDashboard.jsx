@@ -2,14 +2,11 @@ import { faBowlFood, faMessage, faPowerOff, faTrash, faUser } from '@fortawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useContext, useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
-import { deleteUserAPI, getAllChatsDetailAPI, getAllRecipesDetailAPI, getAllUsersDetailsAPI, getSingleUsersRecipeAPI } from '../service/allApi';
+import { deleteUserAPI, getAllChatsDetailAPI, getAllRecipesDetailAPI, getAllUsersDetailsAPI } from '../service/allApi';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
-import { SingleUsersRecipeContext } from '../context/ContextShare';
-
 
 function AdminDashboard() {
-  const { setSingleUsersRecipe } = useContext(SingleUsersRecipeContext)
   const [allRecipesDetails, setAllRecipesDetails] = useState([])
   const [allUsersDetails, setAllUsersDetails] = useState([])
   const [allChatDetails, setAllChatDetails] = useState([])
@@ -17,7 +14,6 @@ function AdminDashboard() {
   const [token, setToken] = useState("")
   const [recipesdetails, setRecipesdetails] = useState([])
   console.log(recipesdetails);
-
 
   const getallrecipesdetails = async () => {
     if (sessionStorage.getItem("token")) {
@@ -32,7 +28,6 @@ function AdminDashboard() {
     }
   }
   console.log(allRecipesDetails);
-
 
   const getallusersdetails = async () => {
     const result = await getAllUsersDetailsAPI()
@@ -67,23 +62,6 @@ function AdminDashboard() {
     }
   }
 
-
-  const handleGetRecipes = async (id) => {
-
-    if (sessionStorage.getItem("token")) {
-      const token = sessionStorage.getItem("token")
-      const reqHeader = {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      }
-
-      const result = await getSingleUsersRecipeAPI(reqHeader)
-      console.log(result);
-      setSingleUsersRecipe(result.data)
-      sessionStorage.setItem("uid", id)
-    }
-  }
-
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
       setToken(sessionStorage.getItem("token"))
@@ -98,8 +76,7 @@ function AdminDashboard() {
 
   return (
     <>
-
-      <div >
+      <div>
         <div className='container-fluid'>
           <div className="row">
             <div className="col-2 bg-dark d-lg-block d-md-block d-none" style={{ minHeight: "100vh" }}>
@@ -131,7 +108,6 @@ function AdminDashboard() {
               {/* header */}
               <Header />
 
-
               {token && <div>
                 {/* All recipes button */}
                 <div className='container-fluid mt-4 mb-4 d-lg-none d-md-none d-block'>
@@ -156,7 +132,6 @@ function AdminDashboard() {
                           <th>#</th>
                           <th>Username</th>
                           <th>Email</th>
-
                         </tr>
                       </thead>
                       <tbody>
@@ -164,13 +139,10 @@ function AdminDashboard() {
                           <td>{index + 1}</td>
                           <td>{item?.username}</td>
                           <td>{item?.email}</td>
-                          <td><Link to={'/adminuserrecipes'}><button onClick={() => handleGetRecipes(item?._id)} className='btn btn-sm btn-primary rounded'>View Recipes</button></Link></td>
-                          <td><button onClick={() => handleDelete(item?._id)} className='btn btn-danger p-1  rounded'>
+                          <td><button onClick={() => handleDelete(item?._id)} className='btn btn-danger py-1 px-2  rounded'>
                             <FontAwesomeIcon icon={faTrash} />
                           </button></td>
-
                         </tr>))}
-
                       </tbody>
                     </Table>
                   </div>
@@ -187,11 +159,9 @@ function AdminDashboard() {
                       <button onClick={() => handleDelete(item?._id)} className='btn btn-danger  fs-6      rounded' style={{ position: "absolute", top: "2px", right: "5px", fontWeight: "bold" }}>
                         <FontAwesomeIcon icon={faTrash} />
                       </button>
-                      <Link ><button className='btn btn-sm btn-primary rounded' style={{ position: "absolute", bottom: "2px", right: "5px", fontWeight: "bold" }}>View Recipes</button></Link>
                     </div>))}
                   </div>
                 </div> :
-
                   <div>
                     <h1 className='text-center ' style={{ fontWeight: "bold" }}>No User yet!!!</h1>
                   </div>}
@@ -199,7 +169,6 @@ function AdminDashboard() {
             </div>
           </div>
         </div>
-
       </div>
     </>
   )
