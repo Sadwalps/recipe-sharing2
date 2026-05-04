@@ -1,1 +1,1 @@
-export const serverURL = `http://localhost:4000`
+export const serverURL = `https://recipe-sharing2-backend.onrender.com`
