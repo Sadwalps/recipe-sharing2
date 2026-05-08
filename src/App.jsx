@@ -31,7 +31,7 @@ function App() {
         <Route path='/adminallrecipes' element={<AdminRecipes />} />
         <Route path='/chats' element={<UserChats />} />
         <Route path='/adminchats' element={<AdminChats />} />
-        <Route path='*' element={<PageNotFound />} />   
+        <Route path='*' element={<PageNotFound />} />
       </Routes>
     </>
   )

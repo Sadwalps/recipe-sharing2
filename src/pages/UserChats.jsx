@@ -29,7 +29,6 @@ function UserChats() {
             const result = await getUserChatAPI(reqHeader)
             console.log(result);
             setUserChats(result.data)
-
         }
     }
 
@@ -84,7 +83,6 @@ function UserChats() {
                                         </button>
                                     </div>
                                 </div>
-
                             </div>
                             <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
                         </div>))}
@@ -113,8 +111,6 @@ function UserChats() {
                         </div>
                     </div>}
             </div>
-
-
         </>
     )
 }

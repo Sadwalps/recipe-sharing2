@@ -6,7 +6,6 @@ import { serverURL } from '../service/serverUrl'
 import { deleteUserRecipeAPI } from '../service/allApi'
 
 function RecipeCard({ recipes, setDeleteRecipeStatus, setEditStatus }) {
-
     const handleDelete = async (id) => {
         if (sessionStorage.getItem("token")) {
             const token = sessionStorage.getItem("token")
@@ -30,7 +29,6 @@ function RecipeCard({ recipes, setDeleteRecipeStatus, setEditStatus }) {
             <div className='mt-3 mb-3' >
                 <div className='container-fluid '>
                     <div className="row">
-
                         <div className="col-lg-6  col-12 p-lg-1 p-2">
                             <img src={`${serverURL}/upload/${recipes?.recipeImage}`} alt="" className='w-100' style={{ height: "340px" }} />
                         </div>
@@ -43,14 +41,11 @@ function RecipeCard({ recipes, setDeleteRecipeStatus, setEditStatus }) {
                             <div className='d-flex justify-content-between'>
                                 <Edit recipes={recipes} setEditStatus={setEditStatus} />
                                 <div className='coveringdiv'> <div onClick={() => handleDelete(recipes?._id)} className='bg-danger  d-flex justify-content-center align-items-center rounded' id='deletebutton'><FontAwesomeIcon icon={faTrash} style={{ color: "black" }} /></div>  </div>
-
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </>
     )
 }

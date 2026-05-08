@@ -48,12 +48,10 @@ function AdminChats() {
         <>
 
             <div className='d-flex justify-content-between align-items-center px-3 bg-dark' style={{ minHeight: "10vh" }}>
-
                 <div className='d-flex justify-content-center align-items-center gap-3 w-25' style={{ minHeight: "10vh" }}>
                     <Link to={'/admin'}>    <img className='' src="https://cdn-icons-png.freepik.com/512/10840/10840480.png" alt="app img" style={{ height: "45", width: "45px" }} /></Link>
                 </div>
             </div>
-
 
             <div className='adminchatpage container-fluid'>
                 <div className="row pt-lg-4 pt-3 ">
@@ -72,7 +70,7 @@ function AdminChats() {
 
             {/* chats section */}
             {token ? <div className='mb-4'>
-                {allChatDetails.length>0 ? <div className='container-fluid mt-3'>
+                {allChatDetails.length > 0 ? <div className='container-fluid mt-3'>
                     {allChatDetails?.map((item) => (<div className="row mt-2">
                         <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
                         <div className="col-lg-8 col-md-8 col-sm-8 col-12">

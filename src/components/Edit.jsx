@@ -132,12 +132,10 @@ function Edit({ recipes }) {
         </Modal.Header>
         <Modal.Body className='bg-dark'>
           <div className='d-flex flex-column justify-content-center align-items-center mb-3'>
-
-
             <h3 className='text-light' style={{ fontWeight: "bold" }}>username</h3>
             <input value={userName} type="text" readOnly className='w-75 form-control py-1  text-center' style={{ borderRadius: "15px", fontWeight: "bold" }} />
-
           </div>
+
           <div>
             <div className="row">
               <div className="col-md-2"></div>
@@ -164,8 +162,8 @@ function Edit({ recipes }) {
               <option value="Snacks" style={{ fontWeight: "bold" }}>Snacks</option>
             </select>
           </div>
-
         </Modal.Body>
+
         <Modal.Footer className='bg-dark'>
           <Button onClick={handleCancel} variant="secondary" >
             Cancel

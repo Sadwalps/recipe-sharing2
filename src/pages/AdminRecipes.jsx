@@ -8,7 +8,6 @@ import { faClock, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { deleteRecipeAPI, getAllRecipesDetailAPI } from '../service/allApi';
 import { serverURL } from '../service/serverUrl';
 
-
 function AdminRecipes() {
     const [token, setToken] = useState("")
     const [allRecipes, setAllRecipes] = useState([])
@@ -47,7 +46,6 @@ function AdminRecipes() {
         }
     }
 
-
     useEffect(() => {
         getAllRecipes()
         if (sessionStorage.getItem("token")) {
@@ -58,12 +56,10 @@ function AdminRecipes() {
     return (
         <>
             <div className='d-flex justify-content-between align-items-center px-3 bg-dark' style={{ minHeight: "10vh" }}>
-
                 <div className='d-flex justify-content-center align-items-center gap-3 w-25' style={{ minHeight: "10vh" }}>
                     <Link to={'/admin'}>    <img className='' src="https://cdn-icons-png.freepik.com/512/10840/10840480.png" alt="app img" style={{ height: "45", width: "45px" }} /></Link>
                 </div>
             </div>
-
 
             <div className='adminrecipepage container-fluid'>
                 <div className="row pt-lg-4 pt-3 ">
@@ -80,53 +76,52 @@ function AdminRecipes() {
                 </div>
             </div>
 
-
             {/* recipes card section */}
-           { token?<div>
-            {allRecipes?.length > 0 ? <div className='container-fluid mt-lg-5 mt-3'>
-                <div className="row">
-                    {allRecipes?.map((item) => (<div className="col-md-6 mt-4 mb-4">
-                        <div className="row">
-                            <div className="col-md-2"></div>
-                            <div className="col-md-8">
-                                <Card className='border-0' style={{ width: '100%' }}>
-                                    <Card.Img variant="top" src={`${serverURL}/upload/${item?.recipeImage}`} />
-                                    <Card.Body>
-                                        <h1 className='' style={{ fontWeight: "bold" }}>{item?.recipename}</h1>
-                                        <h5 className='mt-lg-2 mt-1 '>
-                                            <FontAwesomeIcon icon={faClock} className='me-2' />{item?.time}
-                                        </h5>
-                                        <p className='mt-lg-2 mt-1'><span style={{ fontWeight: "bold" }}>Incredients:</span>{item?.incredients
-                                        }</p>
-                                        <h5 className='mb-2'>{item?.category
+            {token ? <div>
+                {allRecipes?.length > 0 ? <div className='container-fluid mt-lg-5 mt-3'>
+                    <div className="row">
+                        {allRecipes?.map((item) => (<div className="col-md-6 mt-4 mb-4">
+                            <div className="row">
+                                <div className="col-md-2"></div>
+                                <div className="col-md-8">
+                                    <Card className='border-0' style={{ width: '100%' }}>
+                                        <Card.Img variant="top" src={`${serverURL}/upload/${item?.recipeImage}`} />
+                                        <Card.Body>
+                                            <h1 className='' style={{ fontWeight: "bold" }}>{item?.recipename}</h1>
+                                            <h5 className='mt-lg-2 mt-1 '>
+                                                <FontAwesomeIcon icon={faClock} className='me-2' />{item?.time}
+                                            </h5>
+                                            <p className='mt-lg-2 mt-1'><span style={{ fontWeight: "bold" }}>Incredients:</span>{item?.incredients
+                                            }</p>
+                                            <h5 className='mb-2'>{item?.category
 
-                                        }</h5>
-                                        <Button onClick={() => handleDelete(item?._id)} variant="danger clas
+                                            }</h5>
+                                            <Button onClick={() => handleDelete(item?._id)} variant="danger clas
                                         rounded " style={{ fontWeight: "bold" }}><FontAwesomeIcon icon={faTrash} style={{ color: "white", marginRight: "7px" }} />Remove</Button>
-                                       
-                                    </Card.Body>
-                                     <div className='w-100 bg-dark text-light p-2 ' style={{fontWeight:"bold"}}>Submitted By:  {item?.userName}</div>
-                                </Card>
-                            </div>
-                            <div className="col-md-2"></div>
-                        </div>
-                    </div>))}
-                </div>
-            </div> :
 
-                <div style={{ minHeight: "69vh" }}>
-                    <div className='container-fluid ' style={{ height: "65vh" }}>
-                        <div className="row">
-                            <div className="col-3"></div>
-                            <div className="col-6  text-info mt-5 pt-5  d-flex flex-column justify-content-center align-items-center">
-                                <img src="https://www.creativefabrica.com/wp-content/uploads/2023/10/26/Empty-meal-tray-Cartoon-kicthen-contain-Graphics-82559752-1.png" alt="" style={{ height: "200px" }} />
-                                <h1 className='text-center ' style={{ fontWeight: "bold" }}>Users not Added any recipes yet!!!</h1>
+                                        </Card.Body>
+                                        <div className='w-100 bg-dark text-light p-2 ' style={{ fontWeight: "bold" }}>Submitted By:  {item?.userName}</div>
+                                    </Card>
+                                </div>
+                                <div className="col-md-2"></div>
                             </div>
-                            <div className="col-3"></div>
-                        </div>
+                        </div>))}
                     </div>
-                </div>}
-                </div>:
+                </div> :
+
+                    <div style={{ minHeight: "69vh" }}>
+                        <div className='container-fluid ' style={{ height: "65vh" }}>
+                            <div className="row">
+                                <div className="col-3"></div>
+                                <div className="col-6  text-info mt-5 pt-5  d-flex flex-column justify-content-center align-items-center">
+                                    <img src="https://www.creativefabrica.com/wp-content/uploads/2023/10/26/Empty-meal-tray-Cartoon-kicthen-contain-Graphics-82559752-1.png" alt="" style={{ height: "200px" }} />
+                                    <h1 className='text-center ' style={{ fontWeight: "bold" }}>Users not Added any recipes yet!!!</h1>
+                                </div>
+                                <div className="col-3"></div>
+                            </div>
+                        </div>
+                    </div>}
+            </div> :
 
                 <div className='container-fluid ' style={{ height: "65vh" }}>
                     <div className="row">
@@ -139,7 +134,6 @@ function AdminRecipes() {
                     </div>
                 </div>}
             <Footer />
-
         </>
     )
 }

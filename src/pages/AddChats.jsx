@@ -93,7 +93,6 @@ function AddChats({ setAddChatStatus }) {
                     </div>
 
                     <textarea value={chatDescription.chat} onChange={(e) => setChatDescription({ ...chatDescription, chat: e.target.value })} name="" id="" className='bg-primary form-control py-1 my-2 text-center rounded' placeholder='****' style={{ fontWeight: "bold" }}>
-
                     </textarea>
                 </Modal.Body>
                 <Modal.Footer>

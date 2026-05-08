@@ -43,7 +43,6 @@ function AdminDashboard() {
   }
   console.log(allChatDetails);
 
-
   const handleDelete = async (id) => {
     if (sessionStorage.getItem("token")) {
       const token = sessionStorage.getItem("token")
@@ -102,14 +101,13 @@ function AdminDashboard() {
                 </button></Link>
               </div>}
             </div>
-
             <div className="col-lg-10 col-md-10 col-12 p-0 ">
 
               {/* header */}
               <Header />
 
               {token && <div>
-                {/* All recipes button */}
+                {/* All recipes,chats and users buttons */}
                 <div className='container-fluid mt-4 mb-4 d-lg-none d-md-none d-block'>
                   <div className="row">
                     <div className="col-md-2"></div>
@@ -148,7 +146,6 @@ function AdminDashboard() {
                   </div>
 
                   {/* for small screen */}
-
                   <div className='container-fluid  mb-4  adminpagesmallscreen'>
                     {allUsersDetails?.map((item, index) => (<div className='w-100 mt-2 border border-3 border-secondary rounded ' style={{ position: "relative" }}>
                       <div className='fs-4 px-3 bg-secondary text-light rounded' style={{ position: "absolute", top: "2px", left: "5px", fontWeight: "bold" }}>{index + 1}</div>

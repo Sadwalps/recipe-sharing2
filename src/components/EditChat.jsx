@@ -90,7 +90,6 @@ function EditChat({ chats, setEditChatStatus }) {
                     </div>
 
                     <textarea value={chatDetails.chat} onChange={(e) => setChatDetails({ ...chatDetails, chat: e.target.value })} name="" id="" className='bg-primary form-control py-1 my-2 text-center rounded' placeholder='****' style={{ fontWeight: "bold" }}>
-
                     </textarea>
                 </Modal.Body>
                 <Modal.Footer>

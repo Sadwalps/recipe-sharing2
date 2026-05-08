@@ -7,11 +7,10 @@ import { useContext } from 'react'
 import { editResponseContent } from '../context/ContextShare'
 
 function MyRecipes() {
-   const {editResponse} = useContext(editResponseContent)
+    const { editResponse } = useContext(editResponseContent)
     const [userRecipes, setUserRecipes] = useState([])
-    const [deleteRecipeStatus, setDeleteRecipeStatus] = useState({})
-   
     console.log(userRecipes);
+    const [deleteRecipeStatus, setDeleteRecipeStatus] = useState({})
 
     const getuserrecipes = async () => {
         if (sessionStorage.getItem("token")) {
@@ -29,16 +28,16 @@ function MyRecipes() {
 
     useEffect(() => {
         getuserrecipes()
-    }, [deleteRecipeStatus,editResponse])
+    }, [deleteRecipeStatus, editResponse])
 
     return (
         <>
             <Header />
-            {userRecipes ?.length>0? <div className='container-fluid' style={{minHeight:"70vh"}}>
+            {userRecipes?.length > 0 ? <div className='container-fluid' style={{ minHeight: "70vh" }}>
                 {userRecipes?.map((item) => (<div className="row">
                     <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
                     <div className="col-lg-8 col-md-8 col-sm-8 col-12">
-                        <RecipeCard recipes={item} setDeleteRecipeStatus={setDeleteRecipeStatus}  />
+                        <RecipeCard recipes={item} setDeleteRecipeStatus={setDeleteRecipeStatus} />
                     </div>
                     <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
                 </div>))}

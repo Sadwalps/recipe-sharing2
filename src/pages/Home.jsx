@@ -22,8 +22,6 @@ function Home() {
     const [userName, setUsername] = useState("")
     console.log(userName);
 
-
-
     const [recipeDetails, setRecipeDetails] = useState({
         recipename: "",
         time: "",
@@ -32,7 +30,6 @@ function Home() {
         recipeImage: ""
     })
     console.log(recipeDetails);
-
 
     const handleShow = () => {
         setShow(true)
@@ -68,8 +65,8 @@ function Home() {
         const { recipename, time, incredients, category, recipeImage } = recipeDetails
         console.log(recipename, time, incredients, category, recipeImage);
         console.log(userName);
-        
-        if (!recipename || !time || !incredients || !category ||!userName) {
+
+        if (!recipename || !time || !incredients || !category || !userName) {
             alert(`Fill the completely`)
         } else {
 
@@ -79,7 +76,7 @@ function Home() {
             reqBody.append("incredients", incredients)
             reqBody.append("category", category)
             reqBody.append("recipeImage", recipeImage)
-            reqBody.append("userName",userName)
+            reqBody.append("userName", userName)
 
             if (token) {
                 const reqHeader = {
@@ -147,8 +144,6 @@ function Home() {
         }
     }, [])
 
-
-
     return (
         <>
             {/* Home page before login */}
@@ -169,12 +164,9 @@ function Home() {
                 </div>
             </div> :
 
-
                 <div>
                     <Header />
-
                     <div id='home2' >
-
                         <div className='container-fluid'>
                             <div className="row pt-lg-5 pt-4 ">
                                 <div className="col-md-2"></div>
@@ -194,16 +186,12 @@ function Home() {
                                         <Modal.Body style={{ backgroundColor: "rgba(27, 26, 26, 0.93)" }}>
 
                                             <div className='d-flex flex-column justify-content-center align-items-center mb-3'>
-
-
                                                 <h3 className='text-light' style={{ fontWeight: "bold" }}>username</h3>
                                                 <input value={userName} type="text" readOnly className='w-75 form-control py-1  text-center' style={{ borderRadius: "15px", fontWeight: "bold" }} />
-
                                             </div>
+
                                             <div>
-
                                                 <div className="row">
-
                                                     <div className="col-md-2"></div>
                                                     <div className="col-md-8 text-center ">
                                                         <label htmlFor="recipeImage">
@@ -227,11 +215,7 @@ function Home() {
                                                     <option value="Deserts" style={{ fontWeight: "bold" }}>Deserts</option>
                                                     <option value="Snacks" style={{ fontWeight: "bold" }}>Snacks</option>
                                                 </select>
-
-
-
                                             </div>
-
                                         </Modal.Body>
                                         <Modal.Footer style={{ backgroundColor: "rgba(27, 26, 26, 0.93)" }}>
                                             <Button onClick={handleCancel} variant="secondary" className='rounded' >

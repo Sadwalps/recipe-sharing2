@@ -9,18 +9,13 @@ function ContextShare({ children }) {
     const [editResponse, setEditResponse] = useState([])
     const [loginResponse, setLoginResponse] = useState(true)
     const [singleUsersRecipe, setSingleUsersRecipe] = useState([])
-   
 
     return (
         <>
             <editResponseContent.Provider value={{ editResponse, setEditResponse }}>
                 <loginResponseContext.Provider value={{ loginResponse, setLoginResponse }}>
                     <SingleUsersRecipeContext value={{ singleUsersRecipe, setSingleUsersRecipe }}>
-                        
-                            {children}
-                       
-
-
+                        {children}
                     </SingleUsersRecipeContext>
                 </loginResponseContext.Provider>
             </editResponseContent.Provider>

@@ -25,7 +25,6 @@ function Header() {
     }
   })
 
-
   const handleLogout = () => {
     sessionStorage.removeItem("existingUser")
     sessionStorage.removeItem("token")
@@ -35,7 +34,6 @@ function Header() {
     alert(`Logging out`)
     navigate('/')
   }
-
 
   return (
     <>
