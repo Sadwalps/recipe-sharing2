@@ -128,7 +128,7 @@ function Edit({ recipes }) {
       <div className='coveringdiv'><div onClick={handleShow} className='bg-primary d-flex justify-content-center align-items-center rounded' id='editbutton' ><FontAwesomeIcon icon={faPenToSquare} style={{ color: "black" }} /></div></div>
       <Modal show={show} onHide={handleClose} size='lg' centered >
         <Modal.Header closeButton className='bg-dark'>
-          <Modal.Title className='bg-dark text-light' style={{ fontWeight: "bold" }}  >Share Your Recipe</Modal.Title>
+          <Modal.Title className='bg-dark text-light' style={{ fontWeight: "bold" }}  >Edit Your Recipe</Modal.Title>
         </Modal.Header>
         <Modal.Body className='bg-dark'>
           <div className='d-flex flex-column justify-content-center align-items-center mb-3'>

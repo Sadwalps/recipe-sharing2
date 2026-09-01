@@ -67,7 +67,7 @@ function Home() {
         console.log(userName);
 
         if (!recipename || !time || !incredients || !category || !userName) {
-            alert(`Fill the completely`)
+            alert(`Fill the Form completely`)
         } else {
 
             const reqBody = new FormData()
