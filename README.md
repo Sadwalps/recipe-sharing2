@@ -65,6 +65,7 @@ Upon logging in, regular users receive a personalized, dynamically updated Home 
 
 ## 📂 Project Structure
 
+```text
 src/
 ├── components/
 │   ├── Header.jsx                 # Navbar with dynamic branding, links, and logout controls
