@@ -65,7 +65,6 @@ Upon logging in, regular users receive a personalized, dynamically updated Home 
 
 ## 📂 Project Structure
 
-```text
 src/
 ├── components/
 │   ├── Header.jsx                 # Navbar with dynamic branding, links, and logout controls
@@ -85,13 +84,15 @@ src/
 │   ├── UserChats.jsx              # Interface for users to create and manage support inquiries
 │   ├── AdminDashboard.jsx         # Main admin workspace for user metrics and management
 │   ├── AdminRecipes.jsx           # Admin moderation view for deleting platform recipes
-│   ├── AdminChat.jsx              # Admin support center for reviewing and purging resolved chats
+│   ├── AdminChats.jsx             # Admin support center for reviewing and purging resolved chats
 │   └── PageNotFound.jsx           # Fallback page for handling invalid routes
 │
 ├── App.jsx                        # Central Router & Route configuration
-└── main.jsx                       # Application entry point
+├── main.jsx                       # Application entry point
+└── App.css                        # Global styling rules, ID/Class selectors, and layout designs                      
 
-Key Components Breakdown
+
+# Key Components Breakdown
 ComponentTypeDescription & Functionality
 Header.jsxComponentNavigation bar with dynamic links, platform branding, and session controls.
 Footer.jsxComponentGlobal footer component providing branding and copyright details.
