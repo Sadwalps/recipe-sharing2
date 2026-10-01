@@ -59,7 +59,7 @@ Upon logging in, regular users receive a personalized, dynamically updated Home 
 - *Frontend Framework:* React.js (JSX)
 - *Styling:* CSS3 / React Bootstrap & Conditional Layouts
 - *State Management & Routing:* React Hooks / Context API / React Router DOM
-- *Iconography:* Font Awesome
+- *Iconography:* Font Awesome Icons
 
 ---
 
@@ -79,7 +79,7 @@ src/
 │   ├── SelectUserPage.jsx         # Role selection view (User vs Admin)
 │   ├── Authentication.jsx         # User Auth page with conditional login/signup rendering
 │   ├── AdminAuthentication.jsx    # Admin Auth page with conditional login/signup rendering
-│   ├── AddChat.jsx                # Modal for submitting new concerns/chats to the admin
+│   ├── AddChats.jsx                # Modal for submitting new concerns/chats to the admin
 │   ├── AllRecipes.jsx             # Public recipe feed with real-time search
 │   ├── MyRecipes.jsx              # Dashboard for viewing, editing, and deleting user recipes
 │   ├── UserChats.jsx              # Interface for users to create and manage support inquiries
@@ -93,22 +93,23 @@ src/
 └── App.css                        # Global styling rules, ID/Class selectors, and layout designs                      
 
 
-# Key Components Breakdown
-ComponentTypeDescription & Functionality
-Header.jsxComponentNavigation bar with dynamic links, platform branding, and session controls.
-Footer.jsxComponentGlobal footer component providing branding and copyright details.
-RecipeCard.jsxComponentReusable UI card for rendering recipe images, names, timing, ingredients, and categories.
-SelectUserPage.jsxPageEntry portal for selecting access role (User or Admin).
-Authentication.jsxPageSingle-page user auth using conditional rendering for Sign-Up and Login forms.
-AdminAuthentication.jsxPageSingle-page admin auth handling login and registration logic.
-Home.jsxPageDynamic home view with customizable hero section, Quick Actions, and featured recipes.
-AllRecipes.jsxPageGlobal recipe gallery featuring live name/image search filtering.
-MyRecipes.jsxPagePersonal dashboard listing submitted recipes with Edit and Delete options.
-Edit.jsxModalForm modal pre-filled with existing recipe data for easy updating.
-UserChats.jsxPageUser inquiry log featuring an interactive + trigger for new support requests.
-AddChat.jsxModalInput modal for sending concerns directly to the admin panel.
-EditChat.jsxModalForm modal to update previously sent support inquiries.
-AdminDashboard.jsxPageCore admin hub displaying stat metrics and direct user deletion controls.
-AdminRecipes.jsxPageAdmin moderation grid for inspecting and removing any user's recipe.
-AdminChat.jsxPageAdmin support center for reading inquiries and clearing resolved tickets.
-PageNotFound.jsxPageFallback component rendered when visiting undefined routes.
+## Key Components Breakdown
+
+Component                   Type                            Description & Functionality
+Header.jsx                Component                 Navigation bar with dynamic links, platform branding, and session controls.
+Footer.jsx                Component                 Global footer component providing platform summary, branding and social media links.
+RecipeCard.jsx            Component                 Reusable UI card for rendering recipe images, names, timing, ingredients, and categories.
+SelectUserPage.jsx          Page                    Entry portal for selecting access role (User or Admin).
+Authentication.jsx          Page                    Single-page user auth using conditional rendering for Sign-Up and Login forms.
+AdminAuthentication.jsx     Page                    Single-page admin auth handling login and registration logic.
+Home.jsx                    Page                    Dynamic home view with customizable hero section, Quick Actions, and featured recipes.
+AllRecipes.jsx              Page                    Global recipe gallery featuring live name/image search filtering.
+MyRecipes.jsx               Page                    Personal dashboard listing submitted recipes with Edit and Delete options.
+Edit.jsx                 Component/Modal            Form modal pre-filled with existing recipe data for easy updating.
+UserChats.jsx               Page                    User inquiry log featuring an interactive + trigger for new support requests.
+AddChats.jsx                Page/Modal              Input modal for sending concerns directly to the admin panel.
+EditChat.jsx             Component/Modal            Form modal to update previously sent support inquiries.
+AdminDashboard.jsx          Page                    Core admin hub displaying stat metrics and direct user deletion controls.
+AdminRecipes.jsx            Page                    Admin moderation grid for inspecting and removing any user's recipe.
+AdminChats.jsx              Page                    Admin support center for reviewing and deleting user concerns.
+PageNotFound.jsx            Page                    Fallback component rendered when visiting undefined routes.
