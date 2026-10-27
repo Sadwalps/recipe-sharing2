@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock } from '@fortawesome/free-solid-svg-icons'
-
 import Footer from '../components/Footer'
 import { getAllRecipeAPI } from '../service/allApi'
 import { serverURL } from '../service/serverUrl'
