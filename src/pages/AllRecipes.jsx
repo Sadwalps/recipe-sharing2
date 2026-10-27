@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock } from '@fortawesome/free-solid-svg-icons'
-import RecipeCard from '../components/RecipeCard'
+
 import Footer from '../components/Footer'
 import { getAllRecipeAPI } from '../service/allApi'
 
@@ -48,7 +48,7 @@ function AllRecipes() {
                         </div>
                         <div className="col-md-2"></div>
                     </div>
-                    
+
                     {/* For search recipes by using recipe name */}
                     <div>
                         <div className="row">
@@ -66,7 +66,21 @@ function AllRecipes() {
                 {allRecipes?.map((item) => (<div className="row">
                     <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
                     <div className="col-lg-8 col-md-8 col-sm-8 col-12">
-                        <RecipeCard recipes={item} />
+                        <div className='mt-3 mb-3' >
+                            <div className='container-fluid '>
+                                <div className="row">
+                                    <div className="col-lg-6  col-12 p-lg-1 p-2">
+                                        <img src={`${serverURL}/upload/${item?.recipeImage}`} alt="" className='w-100' style={{ height: "340px" }} />
+                                    </div>
+                                    <div className="col-lg-6 ps-lg-5 ps-1 d-flex flex-column justify-content-center ">
+                                        <h1 style={{ fontWeight: "bold" }}>{item?.recipename}</h1>
+                                        <h5 className='mt-lg-2 mt-1'><FontAwesomeIcon icon={faClock} /> {item?.time}</h5>
+                                        <p className='mt-lg-2 mt-1'><span style={{ fontWeight: "bold" }}>Incredients:</span> {item?.incredients}</p>
+                                        <h5 className='mb-2'>{item?.category}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="col-lg-2 col-md-2 col-sm-2 col-12"></div>
                 </div>))}
