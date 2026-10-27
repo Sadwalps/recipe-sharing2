@@ -5,6 +5,7 @@ import { faClock } from '@fortawesome/free-solid-svg-icons'
 
 import Footer from '../components/Footer'
 import { getAllRecipeAPI } from '../service/allApi'
+import { serverURL } from '../service/serverUrl'
 
 function AllRecipes() {
     const [token, setToken] = useState("")
