@@ -46,7 +46,7 @@ Upon logging in, regular users receive a personalized, dynamically updated Home 
   - View all personal recipe submissions.
   - *Edit Modal (Edit.jsx):* Auto-fills existing details. Clicking *Save Changes* updates the entry, while *Cancel* reverts changes to default.
   - *Delete Action:* Removes personal recipes with a "Recipe successfully deleted" confirmation.
-- *All Recipes Feed (AllRecipes.jsx):* Browse all user-contributed recipes on the platform with built-in real-time search functionality.
+- *All Recipes Feed (AllRecipes.jsx):* Browse all user-contributed recipes on the platform using dedicated display cards (without management buttons) with built-in real-time search functionality.
 - *User Support System (UserChats.jsx):*
   - Access support inquiries via the navbar's *Chat Button*.
   - *Add Inquiry (AddChats.jsx Modal):* Triggered by clicking the *Plus (+)* button. Fill in concern details to notify admins (Alert: "Chat added successfully" / "Fill the form completely" if empty).
@@ -103,7 +103,7 @@ SelectUserPage.jsx          Page                    Entry portal for selecting a
 Authentication.jsx          Page                    Single-page user auth using conditional rendering for Sign-Up and Login forms.
 AdminAuthentication.jsx     Page                    Single-page admin auth handling login and registration logic.
 Home.jsx                    Page                    Dynamic home view with customizable hero section, Quick Actions, and featured recipes.
-AllRecipes.jsx              Page                    Global recipe gallery featuring live name/image search filtering.
+AllRecipes.jsx              Page                    Global recipe gallery featuring live name search filtering.
 MyRecipes.jsx               Page                    Personal dashboard listing submitted recipes with Edit and Delete options.
 Edit.jsx                 Component/Modal            Form modal pre-filled with existing recipe data for easy updating.
 UserChats.jsx               Page                    User inquiry log featuring an interactive + trigger for new support requests.
