@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock } from '@fortawesome/free-solid-svg-icons'
 import Footer from '../components/Footer'
 import { getAllRecipeAPI } from '../service/allApi'
-import { serverURL } from '../service/serverUrl'
 
 function AllRecipes() {
     const [token, setToken] = useState("")
@@ -70,7 +69,7 @@ function AllRecipes() {
                             <div className='container-fluid '>
                                 <div className="row">
                                     <div className="col-lg-6  col-12 p-lg-1 p-2">
-                                        <img src={`${serverURL}/upload/${item?.recipeImage}`} alt="" className='w-100' style={{ height: "340px" }} />
+                                        <img src={item?.recipeImage} alt="" className='w-100' style={{ height: "340px" }} />
                                     </div>
                                     <div className="col-lg-6 ps-lg-5 ps-1 d-flex flex-column justify-content-center ">
                                         <h1 style={{ fontWeight: "bold" }}>{item?.recipename}</h1>

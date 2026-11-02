@@ -2,7 +2,7 @@ import { faClock, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import Edit from './Edit'
-import { serverURL } from '../service/serverUrl'
+
 import { deleteUserRecipeAPI } from '../service/allApi'
 
 function RecipeCard({ recipes, setDeleteRecipeStatus, setEditStatus }) {
@@ -30,7 +30,7 @@ function RecipeCard({ recipes, setDeleteRecipeStatus, setEditStatus }) {
                 <div className='container-fluid '>
                     <div className="row">
                         <div className="col-lg-6  col-12 p-lg-1 p-2">
-                            <img src={`${serverURL}/upload/${recipes?.recipeImage}`} alt="" className='w-100' style={{ height: "340px" }} />
+                            <img src={recipes?.recipeImage} alt="" className='w-100' style={{ height: "340px" }} />
                         </div>
                         <div className="col-lg-6 ps-lg-5 ps-1 d-flex flex-column justify-content-center ">
                             <h1 style={{ fontWeight: "bold" }}>{recipes?.recipename}</h1>

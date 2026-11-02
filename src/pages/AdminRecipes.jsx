@@ -6,7 +6,6 @@ import Card from 'react-bootstrap/Card';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { deleteRecipeAPI, getAllRecipesDetailAPI } from '../service/allApi';
-import { serverURL } from '../service/serverUrl';
 
 function AdminRecipes() {
     const [token, setToken] = useState("")
@@ -85,7 +84,7 @@ function AdminRecipes() {
                                 <div className="col-md-2"></div>
                                 <div className="col-md-8">
                                     <Card className='border-0' style={{ width: '100%' }}>
-                                        <Card.Img variant="top" src={`${serverURL}/upload/${item?.recipeImage}`} />
+                                        <Card.Img variant="top" src={item?.recipeImage} />
                                         <Card.Body>
                                             <h1 className='' style={{ fontWeight: "bold" }}>{item?.recipename}</h1>
                                             <h5 className='mt-lg-2 mt-1 '>

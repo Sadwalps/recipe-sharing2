@@ -8,7 +8,6 @@ import { faClock, faMessage } from '@fortawesome/free-solid-svg-icons'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { addRecipeAPI, getHomeRecipeAPI } from '../service/allApi'
-import { serverURL } from '../service/serverUrl'
 
 function Home() {
     const [islogin, setIslogin] = useState(false)
@@ -253,16 +252,14 @@ function Home() {
                         <div className="row">
                             {homeRecipes?.map((item) => (<div className="col-md-6">
                                 <div className='d-flex flex-column justify-content-center align-items-center'>
-                                    <img src={`${serverURL}/upload/${item?.recipeImage}`} alt="" className='w-100' />
+                                    <img src={item?.recipeImage} alt="" className='w-100' />
                                     <h1 style={{ fontWeight: "bold" }}>Recipename: {item?.recipename}</h1>
                                     <h5 className='mt-lg-2 mt-1'><FontAwesomeIcon icon={faClock} />Time: {item?.time}</h5>
                                     <p className='mt-lg-2 mt-1'><span style={{ fontWeight: "bold" }}>Incredients:</span> {item?.incredients}</p>
                                     <h5 className='mb-2'>Category: {item?.category}</h5>
                                 </div>
                             </div>))}
-
                         </div>
-
                     </div>
 
                     <div className='container-fluid mt-4 mb-3 '>
