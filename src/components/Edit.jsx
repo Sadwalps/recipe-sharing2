@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { serverURL } from '../service/serverUrl';
 import { UpdateUserRecipeAPI } from '../service/allApi';
 import { editResponseContent } from '../context/ContextShare';
 function Edit({ recipes }) {
@@ -142,7 +141,7 @@ function Edit({ recipes }) {
               <div className="col-md-8 text-center ">
                 <label htmlFor="recipeImage">
                   <input key={key} onChange={(e) => handleFile(e)} id='recipeImage' type="file" style={{ display: "none" }} />
-                  <img src={preview ? preview : `${serverURL}/upload/${recipes?.recipeImage}`} alt="" style={{ width: "100%" }} type="file" />
+                  <img src={preview ? preview : `{recipes?.recipeImage}`} alt="" style={{ width: "100%" }} type="file" />
                 </label>
               </div>
               <div className="col-md-2"></div>
